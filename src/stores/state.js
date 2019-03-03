@@ -1,3 +1,3 @@
-export default {
-  geo: { lat: -1, lng: -1 },
+export const state = {
+  geolocation: null,
 };
