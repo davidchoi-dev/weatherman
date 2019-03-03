@@ -16,6 +16,7 @@ export const WEATHERS = {
   FOG: 'FOG',
   CLEAR: 'CLEAR',
   CLOUDS: 'CLOUDS',
+  UNKNOWN: 'UNKNOWN',
 };
 export const OPEN_WEATHERS = {
   200: WEATHERS.THUNDER_STORM, // thunderstorm with light rain
@@ -72,5 +73,5 @@ export const OPEN_WEATHERS = {
   802: WEATHERS.CLOUDS, // scattered clouds
   803: WEATHERS.CLOUDS, // broken clouds
   804: WEATHERS.CLOUDS, // overcast clouds
-  1000: 'UNKNOWN',
+  1000: WEATHERS.UNKNOWN,
 };

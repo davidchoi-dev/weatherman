@@ -4,7 +4,7 @@ import {
   SET_WEATHER
 } from 'stores/configs';
 import Storage from '@/helpers/Storage';
-import { STORAGE_KEYS } from '@/constants';
+import { WEATHERS, STORAGE_KEYS } from '@/constants';
 
 export const mutations = {
   [SET_GEO_LOCATION] (state, { latitude, longitude }) {
@@ -17,7 +17,7 @@ export const mutations = {
       Storage.setItem(STORAGE_KEYS.CITY, state.cityName);
     }
   },
-  [SET_WEATHER] (state, weather = {}) {
+  [SET_WEATHER] (state, weather = WEATHERS.UNKNOWN) {
     if (Object.keys(weather).length) {
       state.weather = weather;
       Storage.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
