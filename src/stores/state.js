@@ -1,6 +1,6 @@
 export const state = {
   geolocation: { latitude: -1, longitude: -1 },
-  city: '',
+  cityName: '',
   weather: {},
   temp: NaN,
 };

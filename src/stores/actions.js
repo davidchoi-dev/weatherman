@@ -7,6 +7,7 @@ import {
   SET_CITY
 } from 'stores/configs';
 import APIOpenWeather from '@/api/APIOpenWeather';
+import { OPEN_WEATHERS } from '@/constants';
 
 const geoLocationPromise = function (options = {}) {
   return new Promise(function (resolve, reject) {
@@ -59,7 +60,11 @@ export const actions = {
         latitude: data.coord.lat,
         longitude: data.coord.lon,
       });
-      commit(SET_WEATHER, data.weather[0]);
+
+      const weatherCode = data.weather[0]
+        ? data.weather[0].id
+        : 1000;
+      commit(SET_WEATHER, OPEN_WEATHERS[weatherCode]);
       return data;
     }
     catch (e) {

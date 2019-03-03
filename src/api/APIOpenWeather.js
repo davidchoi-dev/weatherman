@@ -1,5 +1,5 @@
 import { APICore } from '@/api/APICore';
-import CONSTANTS from '@/constants';
+import { ENV } from '@/constants';
 
 class APIOpenWeather extends APICore {
   constructor (options = {}, key = '') {
@@ -24,4 +24,4 @@ class APIOpenWeather extends APICore {
 
 export default new APIOpenWeather({
   baseURL: 'https://api.openweathermap.org/data/2.5/weather',
-}, CONSTANTS.OPEN_WEATHER_API_KEY);
+}, ENV.OPEN_WEATHER_API_KEY);
