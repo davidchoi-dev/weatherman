@@ -30,8 +30,13 @@ async function locationInitialize () {
   try {
     const storedCity = Storage.getCity();
     const storedWeather = Storage.getWeather();
+    const storedGeo = Storage.getGeo();
+
     if (storedCity) {
       store.commit(SET_CITY, storedCity);
+    }
+    if (storedGeo) {
+      store.commit(SET_GEO_LOCATION, storedGeo);
     }
 
     if (storedWeather) {
@@ -42,7 +47,9 @@ async function locationInitialize () {
         await store.dispatch(FETCH_WEATHER_BY_CITY, storedCity);
       }
       else {
-        await store.dispatch(SET_GEO_LOCATION);
+        if (!storedGeo) {
+          await store.dispatch(SET_GEO_LOCATION);
+        }
         await store.dispatch(FETCH_WEATHER_BY_GEO);
       }
     }
