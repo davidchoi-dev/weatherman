@@ -1,3 +1,3 @@
 export const state = {
-  geolocation: null,
+  geolocation: { latitude: -1, longitude: -1 },
 };
