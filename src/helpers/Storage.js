@@ -1,90 +1,46 @@
 import Cookie from 'js-cookie';
+import { STORAGE_KEYS } from '@/constants';
 
 class Storage {
-  constructor () {
-    this.CITY_KEY = 'city';
-    this.WEATHER_KEY = 'weather';
-    this.GEO_KEY = 'geo';
+  isValidKey (key = '') {
+    return Object.values(STORAGE_KEYS).some(storageKey => key === storageKey);
   }
 
-  saveCity (cityName = '') {
-    if (localStorage && cityName) {
-      localStorage.setItem(this.CITY_KEY, cityName);
+  setItem (key = '', data = '', expires = 0) {
+    if (!this.isValidKey(key)) {
+      throw new Error('IS_INVALID_STORE_KEY');
     }
-    else if (cityName) {
-      Cookie.set(this.CITY_KEY, cityName);
+
+    const stringified = JSON.stringify(data);
+    if (expires || !localStorage) {
+      Cookie.set(key, stringified, { expires });
     }
     else {
-      return false;
+      localStorage.setItem(key, stringified);
     }
   }
 
-  getCity () {
-    return localStorage
-      ? localStorage.getItem(this.CITY_KEY)
-      : Cookie.get(this.CITY_KEY);
+  getItem (key = '') {
+    if (!this.isValidKey(key)) {
+      throw new Error('IS_INVALID_STORE_KEY');
+    }
+
+    const data = localStorage
+      ? localStorage.getItem(key)
+      : Cookie.get(key);
+    return data ? JSON.parse(data) : data;
   }
 
-  removeCity () {
+  removeItem (key = '') {
+    if (!this.isValidKey(key)) {
+      throw new Error('IS_INVALID_STORE_KEY');
+    }
+
     if (localStorage) {
-      localStorage.removeItem(this.CITY_KEY);
+      localStorage.removeItem(key);
     }
     else {
-      Cookie.remove(this.CITY_KEY);
-    }
-  }
-
-  saveWeather (weather = {}) {
-    if (Object.keys(weather).length) {
-      const stringified = JSON.stringify(weather);
-      Cookie.set(this.WEATHER_KEY, stringified, {
-        expires: 1 / 24,
-      });
-    }
-  }
-
-  getWeather () {
-    const stringified = Cookie.get(this.WEATHER_KEY);
-    if (stringified) {
-      return JSON.parse(stringified);
-    }
-    else {
-      return null;
-    }
-  }
-
-  removeWeather () {
-    Cookie.remove(this.WEATHER_KEY);
-  }
-
-  saveGeo (geo = {}) {
-    const isValidGeo = !!Object.keys(geo).length;
-    if (localStorage && isValidGeo) {
-      localStorage.setItem(this.GEO_KEY, JSON.stringify(geo));
-    }
-    else if (isValidGeo) {
-      Cookie.set(this.GEO_KEY, JSON.stringify(geo));
-    }
-    else {
-      return false;
-    }
-  }
-
-  getGeo () {
-    const stringified = localStorage
-      ? localStorage.getItem(this.GEO_KEY)
-      : Cookie.get(this.GEO_KEY);
-    return stringified
-      ? JSON.parse(stringified)
-      : null;
-  }
-
-  removeGeo () {
-    if (localStorage) {
-      localStorage.removeItem(this.GEO_KEY);
-    }
-    else {
-      Cookie.remove(this.GEO_KEY);
+      Cookie.remove(key);
     }
   }
 }

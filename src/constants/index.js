@@ -2,8 +2,12 @@ import ProdConstants from '@/constants/prod';
 import DevConstants from '@/constants/dev';
 const isProduction = process.env.NODE_ENV === 'production';
 
-export default isProduction ? ProdConstants : DevConstants;
 export const ENV = isProduction ? ProdConstants : DevConstants;
+export const STORAGE_KEYS = {
+  CITY: 'CITY_INFO',
+  WEATHER: 'WEATHER_INFO',
+  GEO: 'GEO_INFO',
+};
 export const WEATHERS = {
   THUNDER_STORM: 'THUNDER_STORM',
   DRIZZLE: 'DRIZZLE',

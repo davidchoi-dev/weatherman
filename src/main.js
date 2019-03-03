@@ -12,6 +12,7 @@ import {
   FETCH_WEATHER_BY_GEO,
   FETCH_WEATHER_BY_CITY
 } from 'stores/configs';
+import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
 
 Vue.config.productionTip = false;
@@ -28,9 +29,9 @@ new Vue({
 async function locationInitialize () {
   // Find Geo
   try {
-    const storedCity = Storage.getCity();
-    const storedWeather = Storage.getWeather();
-    const storedGeo = Storage.getGeo();
+    const storedCity = Storage.getItem(STORAGE_KEYS.CITY);
+    const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER);
+    const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
 
     if (storedCity) {
       store.commit(SET_CITY, storedCity);
