@@ -18,9 +18,7 @@ export const mutations = {
     }
   },
   [SET_WEATHER] (state, weather = WEATHERS.UNKNOWN) {
-    if (Object.keys(weather).length) {
-      state.weather = weather;
-      Storage.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
-    }
+    state.weather = weather;
+    Storage.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
   },
 };
