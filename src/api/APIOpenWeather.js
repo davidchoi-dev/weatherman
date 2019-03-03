@@ -15,6 +15,7 @@ class APIOpenWeather extends APICore {
   }
 
   fetchWeatherByCity (cityName) {
+    console.log(cityName);
     return this._get('', {
       q: cityName,
       appid: this.token,

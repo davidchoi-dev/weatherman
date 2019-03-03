@@ -8,14 +8,32 @@ import store from './stores';
 import {
   SET_GEO_LOCATION,
   SET_CITY,
-  SET_WEATHER,
-  FETCH_WEATHER_BY_GEO,
-  FETCH_WEATHER_BY_CITY
+  SET_WEATHER
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
+import axios from 'axios';
 
 Vue.config.productionTip = false;
+
+axios.get('https://openweathermap.org/data/2.5/find', {
+  params: {
+    q: 'Lon',
+    appid: '6fadbcaae085a7bac35e0e4ae59e8dd7',
+    type: 'like',
+    sort: 'population',
+    cnt: 20,
+    callback: 'callback',
+  },
+}).then(res => {
+  console.log(res);
+}).catch(e => {
+  console.error(e);
+});
+
+function callback (a) {
+  console.log(a);
+}
 
 /* eslint-disable no-new */
 new Vue({
@@ -26,37 +44,20 @@ new Vue({
   template: '<App/>',
 });
 
-async function locationInitialize () {
+function locationInitialize () {
   // Find Geo
-  try {
-    const storedCity = Storage.getItem(STORAGE_KEYS.CITY);
-    const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER);
-    const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
+  const storedCity = Storage.getItem(STORAGE_KEYS.CITY);
+  const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER);
+  const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
 
-    if (storedCity) {
-      store.commit(SET_CITY, storedCity);
-    }
-    if (storedGeo) {
-      store.commit(SET_GEO_LOCATION, storedGeo);
-    }
-
-    if (storedWeather) {
-      store.commit(SET_WEATHER, storedWeather);
-    }
-    else {
-      if (storedCity) {
-        await store.dispatch(FETCH_WEATHER_BY_CITY, storedCity);
-      }
-      else {
-        if (!storedGeo) {
-          await store.dispatch(SET_GEO_LOCATION);
-        }
-        await store.dispatch(FETCH_WEATHER_BY_GEO);
-      }
-    }
+  if (storedCity) {
+    store.commit(SET_CITY, storedCity);
   }
-  catch (e) {
-    console.error(e);
+  if (storedGeo) {
+    store.commit(SET_GEO_LOCATION, storedGeo);
+  }
+  if (storedWeather) {
+    store.commit(SET_WEATHER, storedWeather);
   }
 };
 
