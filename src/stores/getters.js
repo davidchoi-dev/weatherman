@@ -1,7 +1,7 @@
 import {
   GET_GEO_LOCATION,
   IS_VALID_GEO_LOCATION,
-  GET_CITY,
+  GET_CURRENT_CITY,
   GET_WEATHER
 } from 'stores/configs';
 
@@ -14,7 +14,7 @@ export const getters = {
     const { latitude, longitude } = geolocation;
     return latitude >= 0 && longitude >= 0;
   },
-  [GET_CITY] (state) {
+  [GET_CURRENT_CITY] (state) {
     return state.cityName;
   },
   [GET_WEATHER] (state) {

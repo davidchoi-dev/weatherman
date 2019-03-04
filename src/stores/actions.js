@@ -4,7 +4,7 @@ import {
   FETCH_WEATHER_BY_CITY,
   HAS_VALID_GEO_LOCATION,
   SET_WEATHER,
-  SET_CITY
+  SET_CURRENT_CITY
 } from 'stores/configs';
 import APIOpenWeather from '@/api/APIOpenWeather';
 import { OPEN_WEATHERS } from '@/constants';
@@ -41,7 +41,7 @@ export const actions = {
     try {
       const { latitude: lat, longitude: lng } = state.geolocation;
       const { data } = await APIOpenWeather.fetchWeatherByGeoLocation({ lat, lng });
-      commit(SET_CITY, data.name);
+      commit(SET_CURRENT_CITY, data.name);
       commit(SET_WEATHER, data.weather[0]);
       return data;
     }
@@ -55,7 +55,7 @@ export const actions = {
     }
     try {
       const { data } = await APIOpenWeather.fetchWeatherByCity(cityName);
-      commit(SET_CITY, data.name);
+      commit(SET_CURRENT_CITY, data.name);
       commit(SET_GEO_LOCATION, {
         latitude: data.coord.lat,
         longitude: data.coord.lon,

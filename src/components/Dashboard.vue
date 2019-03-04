@@ -15,7 +15,7 @@
 import { mapGetters } from 'vuex';
 import {
   GET_GEO_LOCATION,
-  GET_CITY,
+  GET_CURRENT_CITY,
   GET_WEATHER
 } from 'stores/configs';
 
@@ -24,7 +24,7 @@ export default {
   computed: {
     ...mapGetters({
       geolocation: GET_GEO_LOCATION,
-      city: GET_CITY,
+      city: GET_CURRENT_CITY,
       weather: GET_WEATHER,
     }),
   },

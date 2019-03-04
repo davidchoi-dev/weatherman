@@ -3,4 +3,5 @@ export const state = {
   cityName: '',
   weather: {},
   temp: NaN,
+  cities: [],
 };

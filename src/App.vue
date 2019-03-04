@@ -13,7 +13,7 @@
 import { mapGetters } from 'vuex';
 import Login from '@/components/Login';
 import {
-  GET_CITY,
+  GET_CURRENT_CITY,
   IS_VALID_GEO_LOCATION
 } from 'stores/configs';
 
@@ -25,7 +25,7 @@ export default {
       return !this.city && !this.isValidGeoLocation;
     },
     ...mapGetters({
-      city: GET_CITY,
+      city: GET_CURRENT_CITY,
       isValidGeoLocation: IS_VALID_GEO_LOCATION,
     }),
   },
