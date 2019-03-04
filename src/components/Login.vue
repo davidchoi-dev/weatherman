@@ -3,11 +3,12 @@
     <div class=login-form>
       <div v-show="step === 0">
         <h3>Where are you?</h3>
-        <input v-model="cityName" type="text" @keyup.enter="nextStep">
+        <!--<input v-model="cityName" type="text" @keyup.enter="nextStep">-->
+        <CitySearchForm @change="onChangeCityName" />
       </div>
       <div v-show="step === 1">
         <h3>What's your name?</h3>
-        <input v-model="userName" type="text" @keyup.enter="submit">
+        <input v-model="userName" type="text" @keyup.enter="close">
       </div>
     </div>
   </div>
@@ -15,27 +16,31 @@
 
 <script>
 import { mapMutations } from 'vuex';
-import { SET_CITY } from 'stores/configs';
+import { SET_CURRENT_CITY } from 'stores/configs';
+import CitySearchForm from '@/components/CitySearchForm';
 
 export default {
   name: 'Login',
+  components: { CitySearchForm },
   data () {
     return {
-      cityName: '',
       userName: '',
       step: 0,
     };
   },
   methods: {
+    onChangeCityName (cityName) {
+      this.setCity(cityName);
+      this.nextStep();
+    },
     nextStep () {
       this.step = 1;
     },
-    submit () {
-      this.setCity(this.cityName);
+    close () {
       this.$emit('close');
     },
     ...mapMutations({
-      setCity: SET_CITY,
+      setCity: SET_CURRENT_CITY,
     }),
   },
 };
@@ -59,7 +64,7 @@ export default {
   color: #fff;
   text-align: center;
 }
-input {
+input, /deep/ input {
   background-color: transparent;
   border: {
     top: none;
