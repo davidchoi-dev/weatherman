@@ -12,28 +12,8 @@ import {
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
-import axios from 'axios';
 
 Vue.config.productionTip = false;
-
-axios.get('https://openweathermap.org/data/2.5/find', {
-  params: {
-    q: 'Lon',
-    appid: '6fadbcaae085a7bac35e0e4ae59e8dd7',
-    type: 'like',
-    sort: 'population',
-    cnt: 20,
-    callback: 'callback',
-  },
-}).then(res => {
-  console.log(res);
-}).catch(e => {
-  console.error(e);
-});
-
-function callback (a) {
-  console.log(a);
-}
 
 /* eslint-disable no-new */
 new Vue({
