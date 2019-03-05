@@ -18,17 +18,6 @@ import Cities from 'static/city.list.min';
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>',
-});
-
-store.commit(SET_CITIES, Cities);
-
 function locationInitialize () {
   // Find Geo
   const storedCity = Storage.getItem(STORAGE_KEYS.CITY);
@@ -48,6 +37,15 @@ function locationInitialize () {
   if (storedUser) {
     store.commit(SET_USER_NAME, storedUser);
   }
-};
-
+}
 locationInitialize();
+store.commit(SET_CITIES, Cities);
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>',
+});
