@@ -10,7 +10,7 @@ import {
   SET_CURRENT_CITY,
   SET_WEATHER,
   SET_CITIES,
-  SET_USER_NAME
+  SET_USER_NAME, FETCH_WEATHER_BY_CITY, FETCH_WEATHER_BY_GEO
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
@@ -18,34 +18,40 @@ import Cities from 'static/city.list.min';
 
 Vue.config.productionTip = false;
 
-function locationInitialize () {
+async function locationInitialize () {
   // Find Geo
   const storedCity = Storage.getItem(STORAGE_KEYS.CITY);
-  const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER);
+  const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER, true);
   const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
   const storedUser = Storage.getItem(STORAGE_KEYS.USER);
 
-  if (storedCity) {
-    store.commit(SET_CURRENT_CITY, storedCity);
-  }
-  if (storedGeo) {
-    store.commit(SET_GEOLOCATION, storedGeo);
-  }
-  if (storedWeather) {
-    store.commit(SET_WEATHER, storedWeather);
-  }
   if (storedUser) {
     store.commit(SET_USER_NAME, storedUser);
   }
+  console.log(storedWeather);
+  if (storedWeather) {
+    console.log(1);
+    store.commit(SET_WEATHER, storedWeather);
+  }
+  else if (storedCity) {
+    store.commit(SET_CURRENT_CITY, storedCity);
+    await store.dispatch(FETCH_WEATHER_BY_CITY, storedCity.id);
+  }
+  else if (storedGeo) {
+    store.commit(SET_GEOLOCATION, storedGeo);
+    await store.dispatch(FETCH_WEATHER_BY_GEO);
+  }
 }
-locationInitialize();
-store.commit(SET_CITIES, Cities);
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>',
-});
+(async function () {
+  await locationInitialize();
+  store.commit(SET_CITIES, Cities);
+  /* eslint-disable no-new */
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    components: { App },
+    template: '<App/>',
+  });
+}());

@@ -20,12 +20,12 @@ class Storage {
     }
   }
 
-  getItem (key = '') {
+  getItem (key = '', isCookie = false) {
     if (!this.isValidKey(key)) {
       throw new Error('IS_INVALID_STORE_KEY');
     }
 
-    const data = localStorage
+    const data = localStorage && !isCookie
       ? localStorage.getItem(key)
       : Cookie.get(key);
     return data ? JSON.parse(data) : data;

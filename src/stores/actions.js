@@ -57,7 +57,7 @@ export const actions = {
       const { data } = await APIOpenWeather.fetchWeatherByGeoLocation({ lat, lng });
       const city = state.cities.find(city => city.id === data.id);
       commit(SET_CURRENT_CITY, city);
-      commit(SET_WEATHER, data.weather);
+      commit(SET_WEATHER, data.weather[0]);
       return data;
     }
     catch (e) {
@@ -74,7 +74,7 @@ export const actions = {
         latitude: data.coord.lat,
         longitude: data.coord.lon,
       });
-      commit(SET_WEATHER, data.weather);
+      commit(SET_WEATHER, data.weather[0]);
       return data;
     }
     catch (e) {

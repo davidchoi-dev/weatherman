@@ -19,8 +19,7 @@ export const mutations = {
       StorageHelper.setItem(STORAGE_KEYS.CITY, state.currentCity);
     }
   },
-  [SET_WEATHER] (state, weathers = []) {
-    const weather = weathers[0];
+  [SET_WEATHER] (state, weather) {
     if (!weather) {
       throw new Error('there is no weather data!');
     }
