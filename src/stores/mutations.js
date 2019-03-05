@@ -15,8 +15,8 @@ export const mutations = {
   },
   [SET_CURRENT_CITY] (state, cityName = '') {
     if (cityName) {
-      state.cityName = cityName;
-      StorageHelper.setItem(STORAGE_KEYS.CITY, state.cityName);
+      state.currentCityName = cityName;
+      StorageHelper.setItem(STORAGE_KEYS.CITY, state.currentCityName);
     }
   },
   [SET_WEATHER] (state, weather = WEATHERS.UNKNOWN) {

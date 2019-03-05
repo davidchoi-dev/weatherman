@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import { SET_USER_NAME, SET_CURRENT_CITY } from 'stores/configs';
 import CitySearchForm from '@/components/CitySearchForm';
 
@@ -26,6 +26,11 @@ export default {
       userName: '',
       step: 0,
     };
+  },
+  computed: {
+    ...mapState({
+      storedCity: 'currentCityName',
+    }),
   },
   methods: {
     onChangeCityName (cityName) {
@@ -43,6 +48,11 @@ export default {
       setCity: SET_CURRENT_CITY,
       setUser: SET_USER_NAME,
     }),
+  },
+  created () {
+    if (this.storedCity) {
+      this.nextStep();
+    }
   },
 };
 </script>

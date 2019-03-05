@@ -10,7 +10,7 @@ export const getters = {
     return latitude >= 0 && longitude >= 0;
   },
   [NEED_LOGIN] (state, getters) {
-    const invalidCity = !state.cityName && getters[IS_VALID_GEO_LOCATION];
+    const invalidCity = !state.currentCityName && getters[IS_VALID_GEO_LOCATION];
     const invalidUser = !state.userName;
     return invalidCity || invalidUser;
   },
