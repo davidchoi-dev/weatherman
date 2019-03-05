@@ -1,10 +1,12 @@
 import {
   SET_GEOLOCATION,
+  SET_GEOLOCATION_WITH_WEATHER,
   FETCH_WEATHER_BY_GEO,
   FETCH_WEATHER_BY_CITY,
   IS_VALID_GEO_LOCATION,
   SET_WEATHER,
-  SET_CURRENT_CITY
+  SET_CURRENT_CITY,
+  SET_CURRENT_CITY_WITH_WEATHER
 } from 'stores/configs';
 import APIOpenWeather from '@/api/APIOpenWeather';
 import { OPEN_WEATHERS } from '@/constants';
@@ -16,7 +18,7 @@ const geoLocationPromise = function (options = {}) {
 };
 
 export const actions = {
-  async [SET_GEOLOCATION] ({ commit }) {
+  async [SET_GEOLOCATION_WITH_WEATHER] ({ commit, dispatch }) {
     try {
       const { coords } = await geoLocationPromise();
       if (typeof coords.latitude !== 'number' || typeof coords.longitude !== 'number') {
@@ -27,10 +29,23 @@ export const actions = {
         latitude: coords.latitude,
         longitude: coords.longitude,
       });
+      await dispatch(FETCH_WEATHER_BY_GEO);
       return coords;
     }
     catch (e) {
       return Promise.reject(e);
+    }
+  },
+  async [SET_CURRENT_CITY_WITH_WEATHER] ({ commit, dispatch }, cityName) {
+    if (!cityName) {
+      return;
+    }
+    commit(SET_CURRENT_CITY, cityName);
+    try {
+      await dispatch(FETCH_WEATHER_BY_CITY, cityName);
+    }
+    catch (e) {
+      console.error(e);
     }
   },
   async [FETCH_WEATHER_BY_GEO] ({ commit, state, getters }) {

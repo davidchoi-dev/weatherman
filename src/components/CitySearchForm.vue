@@ -1,12 +1,12 @@
 <template>
   <div class="city-search-form">
     <div class="city-input-wrapper">
-      <input v-model="cityName" type="text" @keyup="onKeyup" @keyup.enter="onEnter">
+      <input v-model="cityName" type="text" @keyup="onKeyup" @keyup.enter="submit">
       <ul v-show="isShowCityList">
         <li
           v-for="city in filteredCityList"
           :key="city.id"
-          @click="setCityName(city.name)">
+          @click="onClickCityList(city.name)">
           {{ city.name }}
         </li>
       </ul>
@@ -34,9 +34,10 @@ export default {
     setShowCityList (bool) {
       this.isShowCityList = bool;
     },
-    setCityName (cityName) {
+    onClickCityList (cityName) {
       this.cityName = cityName;
       this.setShowCityList(false);
+      this.submit();
     },
     onKeyup: _.debounce(function () {
       this.updateFilteredCityList();
@@ -51,8 +52,8 @@ export default {
         this.filteredCityList = this.cities.filter(city => city.name.includes(this.cityName));
       }
     },
-    onEnter () {
-      this.$emit('change', this.cityName);
+    submit () {
+      this.$emit('submit', this.cityName);
       this.cityName = '';
       this.filteredCityList = [];
       this.setShowCityList(false);
