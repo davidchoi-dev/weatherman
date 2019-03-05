@@ -18,7 +18,7 @@ export default {
   name: 'Dashboard',
   computed: {
     ...mapState({
-      city: 'currentCityName',
+      city: 'currentCity',
       weather: 'weather',
       geolocation: 'geolocation',
     }),

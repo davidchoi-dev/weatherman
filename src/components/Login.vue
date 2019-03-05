@@ -3,7 +3,7 @@
     <div class=login-form>
       <div v-show="step === 0">
         <h3>Where are you?</h3>
-        <CitySearchForm @submit="onChangeCityName" />
+        <CitySearchForm @submit="onChangeCity" />
         <button @click="onClickCurrentLocation">Current Location</button>
       </div>
       <div v-show="step === 1">
@@ -34,13 +34,13 @@ export default {
   },
   computed: {
     ...mapState({
-      storedCity: 'currentCityName',
+      storedCity: 'currentCity',
     }),
   },
   methods: {
-    async onChangeCityName (cityName) {
+    async onChangeCity (city) {
       try {
-        await this.setCityWithWeather(cityName);
+        await this.setCityWithWeather(city);
         this.nextStep();
       }
       catch (e) {

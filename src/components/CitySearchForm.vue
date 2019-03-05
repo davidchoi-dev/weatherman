@@ -1,12 +1,12 @@
 <template>
   <div class="city-search-form">
     <div class="city-input-wrapper">
-      <input v-model="cityName" type="text" @keyup="onKeyup" @keyup.enter="submit">
+      <input v-model="cityName" type="text" @keyup="onKeyup">
       <ul v-show="isShowCityList">
         <li
           v-for="city in filteredCityList"
           :key="city.id"
-          @click="onClickCityList(city.name)">
+          @click="onClickCityList(city)">
           {{ city.name }}
         </li>
       </ul>
@@ -22,6 +22,7 @@ export default {
   name: 'CitySearchForm',
   data () {
     return {
+      selectedCity: null,
       cityName: '',
       isShowCityList: false,
       filteredCityList: [],
@@ -34,8 +35,9 @@ export default {
     setShowCityList (bool) {
       this.isShowCityList = bool;
     },
-    onClickCityList (cityName) {
-      this.cityName = cityName;
+    onClickCityList (city) {
+      this.cityName = city.name;
+      this.selectedCity = city;
       this.setShowCityList(false);
       this.submit();
     },
@@ -53,7 +55,7 @@ export default {
       }
     },
     submit () {
-      this.$emit('submit', this.cityName);
+      this.$emit('submit', this.selectedCity);
       this.cityName = '';
       this.filteredCityList = [];
       this.setShowCityList(false);

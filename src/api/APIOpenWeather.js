@@ -14,10 +14,9 @@ class APIOpenWeather extends APICore {
     });
   }
 
-  fetchWeatherByCity (cityName) {
-    console.log(cityName);
+  fetchWeatherByCity (cityId) {
     return this._get('', {
-      q: cityName,
+      id: cityId,
       appid: this.token,
     });
   }

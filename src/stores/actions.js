@@ -9,7 +9,6 @@ import {
   SET_CURRENT_CITY_WITH_WEATHER
 } from 'stores/configs';
 import APIOpenWeather from '@/api/APIOpenWeather';
-import { OPEN_WEATHERS } from '@/constants';
 
 const geoLocationPromise = function (options = {}) {
   return new Promise(function (resolve, reject) {
@@ -36,13 +35,13 @@ export const actions = {
       return Promise.reject(e);
     }
   },
-  async [SET_CURRENT_CITY_WITH_WEATHER] ({ commit, dispatch }, cityName) {
-    if (!cityName) {
+  async [SET_CURRENT_CITY_WITH_WEATHER] ({ commit, dispatch }, city) {
+    if (!city) {
       return;
     }
-    commit(SET_CURRENT_CITY, cityName);
+    commit(SET_CURRENT_CITY, city);
     try {
-      await dispatch(FETCH_WEATHER_BY_CITY, cityName);
+      await dispatch(FETCH_WEATHER_BY_CITY, city.id);
     }
     catch (e) {
       console.error(e);
@@ -56,30 +55,26 @@ export const actions = {
     try {
       const { latitude: lat, longitude: lng } = state.geolocation;
       const { data } = await APIOpenWeather.fetchWeatherByGeoLocation({ lat, lng });
-      commit(SET_CURRENT_CITY, data.name);
-      commit(SET_WEATHER, data.weather[0]);
+      const city = state.cities.find(city => city.id === data.id);
+      commit(SET_CURRENT_CITY, city);
+      commit(SET_WEATHER, data.weather);
       return data;
     }
     catch (e) {
       return Promise.reject(e);
     }
   },
-  async [FETCH_WEATHER_BY_CITY] ({ commit }, cityName = '') {
-    if (!cityName) {
+  async [FETCH_WEATHER_BY_CITY] ({ commit }, cityId) {
+    if (!cityId) {
       return;
     }
     try {
-      const { data } = await APIOpenWeather.fetchWeatherByCity(cityName);
-      commit(SET_CURRENT_CITY, data.name);
+      const { data } = await APIOpenWeather.fetchWeatherByCity(cityId);
       commit(SET_GEOLOCATION, {
         latitude: data.coord.lat,
         longitude: data.coord.lon,
       });
-
-      const weatherCode = data.weather[0]
-        ? data.weather[0].id
-        : 1000;
-      commit(SET_WEATHER, OPEN_WEATHERS[weatherCode]);
+      commit(SET_WEATHER, data.weather);
       return data;
     }
     catch (e) {
