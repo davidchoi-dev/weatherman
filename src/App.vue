@@ -1,10 +1,11 @@
 <template>
   <div id="app">
+    <WeatherPhoto />
     <transition name="fade">
       <Login v-if="needLogin" />
     </transition>
     <transition name=fade>
-      <router-view />
+      <router-view v-if="!needLogin" />
     </transition>
   </div>
 </template>
@@ -13,10 +14,11 @@
 import { mapGetters } from 'vuex';
 import Login from '@/components/Login';
 import { NEED_LOGIN } from 'stores/configs';
+import WeatherPhoto from '@/components/WeatherPhoto';
 
 export default {
   name: 'App',
-  components: { Login },
+  components: { WeatherPhoto, Login },
   computed: {
     ...mapGetters({
       needLogin: NEED_LOGIN,

@@ -54,7 +54,7 @@ async function locationInitialize () {
   await locationInitialize();
   store.commit(SET_CITIES, Cities);
   store.commit(SET_PHOTOS, Photos);
-  store.commit(SET_WEATHER_PHOTO, store.state.weather.name);
+  store.commit(SET_WEATHER_PHOTO, store.state.weather ? store.state.weather : null);
   /* eslint-disable no-new */
   new Vue({
     el: '#app',

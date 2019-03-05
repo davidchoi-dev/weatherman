@@ -1,6 +1,5 @@
 <template>
   <div id="dashboard">
-    <WeatherPhoto />
     <div v-show="userName">Hi, {{ userName }}</div>
     <div>
       <h3>Your position is</h3>
@@ -17,10 +16,11 @@
 <script>
 import { mapState } from 'vuex';
 import WeatherPhoto from '@/components/WeatherPhoto';
+import Login from '@/components/Login';
 
 export default {
   name: 'Dashboard',
-  components: { WeatherPhoto },
+  components: { Login, WeatherPhoto },
   computed: {
     ...mapState({
       city: 'currentCity',
