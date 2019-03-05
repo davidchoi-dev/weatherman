@@ -7,7 +7,8 @@ import {
   SET_AIR_QUALITY
 } from 'stores/configs';
 import StorageHelper from '@/helpers/Storage';
-import { OPEN_WEATHERS, STORAGE_KEYS, WEATHER_SAVE_EXPIRY } from '@/constants';
+import WeatherHelper from '@/helpers/Weather';
+import { STORAGE_KEYS, WEATHER_SAVE_EXPIRY } from '@/constants';
 
 export const mutations = {
   [SET_GEOLOCATION] (state, { latitude, longitude }) {
@@ -25,12 +26,13 @@ export const mutations = {
       throw new Error('there is no weather data!');
     }
 
-    weather.name = OPEN_WEATHERS[weather.id];
+    weather.name = WeatherHelper.getWeatherName(weather.id);
     state.weather = weather;
     StorageHelper.setItem(STORAGE_KEYS.WEATHER, state.weather, WEATHER_SAVE_EXPIRY);
   },
   [SET_AIR_QUALITY] (state, airQuality) {
     if (airQuality) {
+      airQuality.name = WeatherHelper.getAirQualityName(airQuality.aqi);
       state.airQuality = airQuality;
       StorageHelper.setItem(STORAGE_KEYS.AIR_QUALITY, airQuality, WEATHER_SAVE_EXPIRY);
     }

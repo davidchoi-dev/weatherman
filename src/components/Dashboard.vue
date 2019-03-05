@@ -8,7 +8,7 @@
       <p>lng: {{ geolocation.longitude }}</p>
       <p>city: {{ city }}</p>
       <p>weather: {{ weather }}</p>
-      <p v-if="airQuality">aqi: {{ airQuality.aqi }}</p>
+      <p v-if="airQuality">aqi: {{ airQuality.name }}</p>
     </div>
   </div>
 </template>
