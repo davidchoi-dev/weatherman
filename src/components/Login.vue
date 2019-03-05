@@ -15,7 +15,13 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import { SET_USER_NAME, SET_CURRENT_CITY } from 'stores/configs';
+import {
+  SET_USER_NAME,
+  SET_CURRENT_CITY,
+  FETCH_WEATHER_BY_CITY,
+  FETCH_WEATHER_BY_GEO,
+  SET_GEOLOCATION,
+} from 'stores/configs';
 import CitySearchForm from '@/components/CitySearchForm';
 
 export default {
@@ -47,6 +53,7 @@ export default {
     ...mapMutations({
       setCity: SET_CURRENT_CITY,
       setUser: SET_USER_NAME,
+      setGeolocation: SET_GEOLOCATION,
     }),
   },
   created () {

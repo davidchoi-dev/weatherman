@@ -6,7 +6,7 @@ import App from './App';
 import router from './router';
 import store from './stores';
 import {
-  SET_GEO_LOCATION,
+  SET_GEOLOCATION,
   SET_CURRENT_CITY,
   SET_WEATHER,
   SET_CITIES,
@@ -40,7 +40,7 @@ function locationInitialize () {
     store.commit(SET_CURRENT_CITY, storedCity);
   }
   if (storedGeo) {
-    store.commit(SET_GEO_LOCATION, storedGeo);
+    store.commit(SET_GEOLOCATION, storedGeo);
   }
   if (storedWeather) {
     store.commit(SET_WEATHER, storedWeather);

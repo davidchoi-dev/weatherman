@@ -1,5 +1,5 @@
 import {
-  SET_GEO_LOCATION,
+  SET_GEOLOCATION,
   SET_CURRENT_CITY,
   SET_WEATHER,
   SET_CITIES,
@@ -9,7 +9,7 @@ import StorageHelper from '@/helpers/Storage';
 import { WEATHERS, STORAGE_KEYS } from '@/constants';
 
 export const mutations = {
-  [SET_GEO_LOCATION] (state, { latitude, longitude }) {
+  [SET_GEOLOCATION] (state, { latitude, longitude }) {
     state.geolocation = { latitude, longitude };
     Storage.setItem(STORAGE_KEYS.GEO, state.geolocation);
   },

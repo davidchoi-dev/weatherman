@@ -1,5 +1,5 @@
 import {
-  SET_GEO_LOCATION,
+  SET_GEOLOCATION,
   FETCH_WEATHER_BY_GEO,
   FETCH_WEATHER_BY_CITY,
   IS_VALID_GEO_LOCATION,
@@ -16,14 +16,14 @@ const geoLocationPromise = function (options = {}) {
 };
 
 export const actions = {
-  async [SET_GEO_LOCATION] ({ commit }) {
+  async [SET_GEOLOCATION] ({ commit }) {
     try {
       const { coords } = await geoLocationPromise();
       if (typeof coords.latitude !== 'number' || typeof coords.longitude !== 'number') {
         console.error(`Not allowed geo location (lat: ${coords.latitude}, lng: ${coords.longitude})`);
         throw new Error('NOT_VALID_COORDS');
       }
-      commit(SET_GEO_LOCATION, {
+      commit(SET_GEOLOCATION, {
         latitude: coords.latitude,
         longitude: coords.longitude,
       });
@@ -56,7 +56,7 @@ export const actions = {
     try {
       const { data } = await APIOpenWeather.fetchWeatherByCity(cityName);
       commit(SET_CURRENT_CITY, data.name);
-      commit(SET_GEO_LOCATION, {
+      commit(SET_GEOLOCATION, {
         latitude: data.coord.lat,
         longitude: data.coord.lon,
       });
