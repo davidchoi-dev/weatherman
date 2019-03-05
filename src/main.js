@@ -14,7 +14,7 @@ import {
   FETCH_WEATHER_BY_GEO,
   SET_AIR_QUALITY,
   SET_PHOTOS,
-  SET_CURRENT_CITY_WITH_WEATHER, SET_WEATHER_PHOTO
+  SET_CURRENT_CITY_WITH_WEATHER
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
@@ -37,9 +37,9 @@ async function locationInitialize () {
   }
   if (storedCity && storedWeather) {
     store.commit(SET_CURRENT_CITY, storedCity);
-    store.commit(SET_WEATHER, storedWeather);
+    store.dispatch(SET_WEATHER, storedWeather);
     store.commit(SET_GEOLOCATION, storedGeo);
-    store.commit(SET_AIR_QUALITY, storedAirQuality);
+    store.dispatch(SET_AIR_QUALITY, storedAirQuality);
   }
   else if (storedCity) {
     await store.dispatch(SET_CURRENT_CITY_WITH_WEATHER, storedCity);
@@ -51,10 +51,9 @@ async function locationInitialize () {
 }
 
 (async function () {
-  await locationInitialize();
   store.commit(SET_CITIES, Cities);
   store.commit(SET_PHOTOS, Photos);
-  store.commit(SET_WEATHER_PHOTO, store.state.weather ? store.state.weather : null);
+  await locationInitialize();
   /* eslint-disable no-new */
   new Vue({
     el: '#app',

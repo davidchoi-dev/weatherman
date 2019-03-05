@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <WeatherPhoto />
-    <transition name="fade">
-      <Login v-if="needLogin" />
+    <transition name="fade" appear>
+      <WeatherPhoto />
     </transition>
-    <transition name=fade>
-      <router-view v-if="!needLogin" />
-    </transition>
+    <transition-group name="fade" appear>
+      <Login v-if="needLogin" key="login" />
+      <router-view v-else key="routerView" />
+    </transition-group>
   </div>
 </template>
 

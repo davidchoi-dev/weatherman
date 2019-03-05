@@ -9,8 +9,7 @@ import {
   SET_WEATHER_PHOTO
 } from 'stores/configs';
 import StorageHelper from '@/helpers/Storage';
-import WeatherHelper from '@/helpers/Weather';
-import { STORAGE_KEYS, WEATHER_SAVE_EXPIRY, WEATHERS } from '@/constants';
+import { STORAGE_KEYS, WEATHER_SAVE_EXPIRY } from '@/constants';
 
 export const mutations = {
   [SET_GEOLOCATION] (state, { latitude, longitude }) {
@@ -24,20 +23,12 @@ export const mutations = {
     }
   },
   [SET_WEATHER] (state, weather) {
-    if (!weather) {
-      throw new Error('there is no weather data!');
-    }
-
-    weather.name = WeatherHelper.getWeatherName(weather.id);
     state.weather = weather;
     StorageHelper.setItem(STORAGE_KEYS.WEATHER, state.weather, WEATHER_SAVE_EXPIRY);
   },
   [SET_AIR_QUALITY] (state, airQuality) {
-    if (airQuality) {
-      airQuality.name = WeatherHelper.getAirQualityName(airQuality.aqi);
-      state.airQuality = airQuality;
-      StorageHelper.setItem(STORAGE_KEYS.AIR_QUALITY, airQuality, WEATHER_SAVE_EXPIRY);
-    }
+    state.airQuality = airQuality;
+    StorageHelper.setItem(STORAGE_KEYS.AIR_QUALITY, airQuality, WEATHER_SAVE_EXPIRY);
   },
   [SET_WEATHER_PHOTO] (state, weatherName) {
     const { photos } = state;
@@ -45,7 +36,7 @@ export const mutations = {
       state.weatherPhoto = {};
       return;
     }
-    const category = weatherName ? photos[weatherName] : photos[WEATHERS.UNKNOWN];
+    const category = weatherName ? photos[weatherName] : photos.DEFAULT;
     const randomCount = Math.floor(Math.random() * category.length);
     state.weatherPhoto = category[randomCount];
   },
@@ -60,6 +51,7 @@ export const mutations = {
       return;
     }
     state.photos = photos;
+    state.weatherPhoto = photos.DEFAULT[0];
   },
   [SET_USER_NAME] (state, userName = '') {
     if (userName) {

@@ -4,3 +4,16 @@
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+.fade-out-in-enter-active, .fade-out-in-leave-active {
+  transition: opacity 1s;
+}
+.fade-out-in-enter-active {
+  transition-delay: .2s;
+}
+.fade-out-in-leave-active {
+  display: none;
+}
+.fade-out-in-enter, .fade-out-in-leave-to {
+  opacity: 0;
+}

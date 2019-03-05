@@ -51,5 +51,11 @@
     "link": "https://unsplash.com/photos/VL5Gb0sC1LY",
     "source": "unsplash",
     "author": "Simon Noh"
+  }],
+  "DEFAULT": [{
+    "image": "https://images.unsplash.com/photo-1500785489750-e970b7ad5e17",
+    "link": "https://unsplash.com/photos/VL5Gb0sC1LY",
+    "source": "unsplash",
+    "author": "Simon Noh"
   }]
 }

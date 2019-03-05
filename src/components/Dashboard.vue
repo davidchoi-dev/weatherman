@@ -38,5 +38,6 @@ export default {
   height: 100vh;
   text-align: center;
   margin: 2rem;
+  color: #fff;
 }
 </style>

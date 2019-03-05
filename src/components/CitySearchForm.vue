@@ -70,17 +70,24 @@ export default {
 
 <style lang="scss" scoped>
   .city-input-wrapper {
+    width: 100%;
     position: relative;
+  }
+  input {
+    width: 100%;
   }
   ul {
     position: absolute;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     max-height: 200px;
     overflow-y: scroll;
+    z-index: 10;
     li {
       cursor: pointer;
+      margin: 1rem 0;
+      font-size: 1.2rem;
       &:hover {
         opacity: 0.7;
       }
