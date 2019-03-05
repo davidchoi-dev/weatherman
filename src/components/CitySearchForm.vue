@@ -7,7 +7,7 @@
           v-for="city in filteredCityList"
           :key="city.id"
           @click="onClickCityList(city)">
-          {{ city.name }}
+          {{ city.name }}, {{ city.country }}
         </li>
       </ul>
     </div>
