@@ -24,6 +24,9 @@ export const mutations = {
     Storage.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
   },
   [SET_CITIES] (state, cities) {
+    if (state.cities.length) {
+      return;
+    }
     state.cities = cities;
   },
   [SET_USER_NAME] (state, userName = '') {
