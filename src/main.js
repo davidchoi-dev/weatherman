@@ -10,7 +10,7 @@ import {
   SET_CURRENT_CITY,
   SET_WEATHER,
   SET_CITIES,
-  SET_USER_NAME, FETCH_WEATHER_BY_CITY, FETCH_WEATHER_BY_GEO
+  SET_USER_NAME, FETCH_WEATHER_BY_CITY, FETCH_WEATHER_BY_GEO, SET_AIR_QUALITY
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
@@ -24,14 +24,16 @@ async function locationInitialize () {
   const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER, true);
   const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
   const storedUser = Storage.getItem(STORAGE_KEYS.USER);
+  const storedAirQuality = Storage.getItem(STORAGE_KEYS.AIR_QUALITY);
 
   if (storedUser) {
     store.commit(SET_USER_NAME, storedUser);
   }
-  console.log(storedWeather);
-  if (storedWeather) {
-    console.log(1);
+  if (storedCity && storedWeather) {
+    store.commit(SET_CURRENT_CITY, storedCity);
     store.commit(SET_WEATHER, storedWeather);
+    store.commit(SET_GEOLOCATION, storedGeo);
+    store.commit(SET_AIR_QUALITY, storedAirQuality);
   }
   else if (storedCity) {
     store.commit(SET_CURRENT_CITY, storedCity);

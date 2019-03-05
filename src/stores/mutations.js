@@ -30,10 +30,13 @@ export const mutations = {
     StorageHelper.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
   },
   [SET_AIR_QUALITY] (state, airQuality) {
-    if (state.weather) {
-      state.weather.airQuality = airQuality;
+    if (airQuality) {
+      if (state.weather) {
+        state.weather.airQuality = airQuality;
+      }
+      state.airQuality = airQuality;
+      StorageHelper.setItem(STORAGE_KEYS.AIR_QUALITY, airQuality);
     }
-    state.airQuality = airQuality;
   },
   [SET_CITIES] (state, cities) {
     if (state.cities.length) {

@@ -95,9 +95,10 @@ export const actions = {
     }
     try {
       const { data } = await APIAirQuality.fetchAirQuality(city.name);
-      if (state.weather) {
-        commit(SET_AIR_QUALITY, data.data);
+      if (data.status !== 'ok') {
+        return;
       }
+      commit(SET_AIR_QUALITY, data.data);
       return data;
     }
     catch (e) {
