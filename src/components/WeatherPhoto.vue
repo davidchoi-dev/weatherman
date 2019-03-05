@@ -1,6 +1,7 @@
 <template>
   <div id="weather-photo">
-    <div></div>
+    <div class="dimmed"></div>
+    <div class="photo" :style="{ 'background-image': `url(${photo.image})` }"></div>
   </div>
 </template>
 
@@ -18,5 +19,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+#weather-photo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+.dimmed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.2);
+}
 </style>
