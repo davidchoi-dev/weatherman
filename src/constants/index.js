@@ -8,6 +8,7 @@ export const STORAGE_KEYS = {
   WEATHER: 'WEATHER_INFO',
   GEO: 'GEO_INFO',
   USER: 'USER',
+  AIR_QUALITY: 'AIR_QUALITY',
 };
 export const WEATHERS = {
   THUNDER_STORM: 'THUNDER_STORM',

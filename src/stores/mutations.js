@@ -3,7 +3,8 @@ import {
   SET_CURRENT_CITY,
   SET_WEATHER,
   SET_CITIES,
-  SET_USER_NAME
+  SET_USER_NAME,
+  SET_AIR_QUALITY
 } from 'stores/configs';
 import StorageHelper from '@/helpers/Storage';
 import { OPEN_WEATHERS, STORAGE_KEYS } from '@/constants';
@@ -27,6 +28,12 @@ export const mutations = {
     weather.name = OPEN_WEATHERS[weather.id];
     state.weather = weather;
     StorageHelper.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
+  },
+  [SET_AIR_QUALITY] (state, airQuality) {
+    if (state.weather) {
+      state.weather.airQuality = airQuality;
+    }
+    state.airQuality = airQuality;
   },
   [SET_CITIES] (state, cities) {
     if (state.cities.length) {
