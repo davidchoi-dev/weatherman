@@ -51,7 +51,11 @@ export default {
         this.setShowCityList(false);
       }
       else {
-        this.filteredCityList = this.cities.filter(city => city.name.includes(this.cityName));
+        this.filteredCityList = this.cities.filter(city => {
+          const cityNameInList = city.name.toUpperCase();
+          const insertedCityName = this.cityName.toUpperCase();
+          return cityNameInList.includes(insertedCityName);
+        });
       }
     },
     submit () {
