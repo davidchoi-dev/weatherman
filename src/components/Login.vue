@@ -4,23 +4,24 @@
       <div v-show="step === 0">
         <h3>Where are you?</h3>
         <CitySearchForm @change="onChangeCityName" />
+        <button @click="onClickCurrentLocation">Current Location</button>
       </div>
       <div v-show="step === 1">
         <h3>What's your name?</h3>
-        <input v-model="userName" type="text" @keyup.enter="close">
+        <input v-model="userName" type="text" @keyup.enter="onChangeUserName">
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import {
   SET_USER_NAME,
   SET_CURRENT_CITY,
   FETCH_WEATHER_BY_CITY,
   FETCH_WEATHER_BY_GEO,
-  SET_GEOLOCATION,
+  SET_GEOLOCATION
 } from 'stores/configs';
 import CitySearchForm from '@/components/CitySearchForm';
 
@@ -39,21 +40,49 @@ export default {
     }),
   },
   methods: {
-    onChangeCityName (cityName) {
+    async onChangeCityName (cityName) {
       this.setCity(cityName);
+      await this.fetchWeather();
       this.nextStep();
+    },
+    async onClickCurrentLocation () {
+      try {
+        await this.setGeolocation();
+        await this.fetchWeatherByGeoLocation();
+        this.nextStep();
+      }
+      catch (e) {
+        alert('Cannot find your location');
+        console.error(e);
+      }
+    },
+    onChangeUserName () {
+      this.setUser(this.userName);
+      this.close();
     },
     nextStep () {
       this.step = 1;
     },
+    async fetchWeather () {
+      try {
+        await this.fetchWeatherByCity();
+      }
+      catch (e) {
+        alert('Cannot find weather of city use current location');
+        console.error(e);
+      }
+    },
     close () {
-      this.setUser(this.userName);
       this.$emit('close');
     },
     ...mapMutations({
       setCity: SET_CURRENT_CITY,
       setUser: SET_USER_NAME,
+    }),
+    ...mapActions({
       setGeolocation: SET_GEOLOCATION,
+      fetchWeatherByCity: FETCH_WEATHER_BY_CITY,
+      fetchWeatherByGeoLocation: FETCH_WEATHER_BY_GEO,
     }),
   },
   created () {
