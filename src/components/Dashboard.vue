@@ -1,5 +1,6 @@
 <template>
   <div id="dashboard">
+    <div v-show="userName">Hi, {{ userName }}</div>
     <div>
       <h3>Your position is</h3>
       <br>
@@ -21,6 +22,7 @@ export default {
       city: 'currentCity',
       weather: 'weather',
       geolocation: 'geolocation',
+      userName: 'userName',
     }),
   },
 };
