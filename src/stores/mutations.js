@@ -11,7 +11,7 @@ import { WEATHERS, STORAGE_KEYS } from '@/constants';
 export const mutations = {
   [SET_GEOLOCATION] (state, { latitude, longitude }) {
     state.geolocation = { latitude, longitude };
-    Storage.setItem(STORAGE_KEYS.GEO, state.geolocation);
+    StorageHelper.setItem(STORAGE_KEYS.GEO, state.geolocation);
   },
   [SET_CURRENT_CITY] (state, cityName = '') {
     if (cityName) {
@@ -21,7 +21,7 @@ export const mutations = {
   },
   [SET_WEATHER] (state, weather = WEATHERS.UNKNOWN) {
     state.weather = weather;
-    Storage.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
+    StorageHelper.setItem(STORAGE_KEYS.WEATHER, state.weather, 1 / 24);
   },
   [SET_CITIES] (state, cities) {
     if (state.cities.length) {
