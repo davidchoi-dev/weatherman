@@ -4,9 +4,10 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export const ENV = isProduction ? ProdConstants : DevConstants;
 export const STORAGE_KEYS = {
-  CITY: 'CITY_INFO',
+  CITY: 'CURRENT_CITY_INFO',
   WEATHER: 'WEATHER_INFO',
   GEO: 'GEO_INFO',
+  USER: 'USER',
 };
 export const WEATHERS = {
   THUNDER_STORM: 'THUNDER_STORM',

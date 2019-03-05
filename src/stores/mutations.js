@@ -2,9 +2,10 @@ import {
   SET_GEO_LOCATION,
   SET_CURRENT_CITY,
   SET_WEATHER,
-  SET_CITIES
+  SET_CITIES,
+  SET_USER_NAME
 } from 'stores/configs';
-import Storage from '@/helpers/Storage';
+import StorageHelper from '@/helpers/Storage';
 import { WEATHERS, STORAGE_KEYS } from '@/constants';
 
 export const mutations = {
@@ -15,7 +16,7 @@ export const mutations = {
   [SET_CURRENT_CITY] (state, cityName = '') {
     if (cityName) {
       state.cityName = cityName;
-      Storage.setItem(STORAGE_KEYS.CITY, state.cityName);
+      StorageHelper.setItem(STORAGE_KEYS.CITY, state.cityName);
     }
   },
   [SET_WEATHER] (state, weather = WEATHERS.UNKNOWN) {
@@ -24,5 +25,11 @@ export const mutations = {
   },
   [SET_CITIES] (state, cities) {
     state.cities = cities;
+  },
+  [SET_USER_NAME] (state, userName = '') {
+    if (userName) {
+      state.userName = userName;
+      StorageHelper.setItem(STORAGE_KEYS.USER, state.userName);
+    }
   },
 };

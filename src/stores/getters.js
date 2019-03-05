@@ -1,23 +1,17 @@
 import {
-  GET_GEO_LOCATION,
   IS_VALID_GEO_LOCATION,
-  GET_CURRENT_CITY,
-  GET_WEATHER
+  NEED_LOGIN
 } from 'stores/configs';
 
 export const getters = {
-  [GET_GEO_LOCATION] (state) {
-    return state.geolocation;
-  },
   [IS_VALID_GEO_LOCATION] (state) {
     const { geolocation } = state;
     const { latitude, longitude } = geolocation;
     return latitude >= 0 && longitude >= 0;
   },
-  [GET_CURRENT_CITY] (state) {
-    return state.cityName;
-  },
-  [GET_WEATHER] (state) {
-    return state.weather;
+  [NEED_LOGIN] (state, getters) {
+    const invalidCity = !state.cityName && getters[IS_VALID_GEO_LOCATION];
+    const invalidUser = !state.userName;
+    return invalidCity || invalidUser;
   },
 };

@@ -12,20 +12,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import {
-  GET_GEO_LOCATION,
-  GET_CURRENT_CITY,
-  GET_WEATHER
-} from 'stores/configs';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Dashboard',
   computed: {
-    ...mapGetters({
-      geolocation: GET_GEO_LOCATION,
-      city: GET_CURRENT_CITY,
-      weather: GET_WEATHER,
+    ...mapState({
+      city: 'currentCityName',
+      weather: 'weather',
+      geolocation: 'geolocation',
     }),
   },
 };

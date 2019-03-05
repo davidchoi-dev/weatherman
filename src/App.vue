@@ -12,21 +12,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import Login from '@/components/Login';
-import {
-  GET_CURRENT_CITY,
-  IS_VALID_GEO_LOCATION
-} from 'stores/configs';
+import { NEED_LOGIN } from 'stores/configs';
 
 export default {
   name: 'App',
   components: { Login },
   computed: {
-    needLogin () {
-      return !this.city && !this.isValidGeoLocation;
-    },
     ...mapGetters({
-      city: GET_CURRENT_CITY,
-      isValidGeoLocation: IS_VALID_GEO_LOCATION,
+      needLogin: NEED_LOGIN,
     }),
   },
 };

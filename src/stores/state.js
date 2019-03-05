@@ -1,7 +1,8 @@
 export const state = {
   geolocation: { latitude: -1, longitude: -1 },
-  cityName: '',
+  currentCityName: '',
   weather: {},
   temp: NaN,
   cities: [],
+  userName: '',
 };

@@ -9,7 +9,8 @@ import {
   SET_GEO_LOCATION,
   SET_CURRENT_CITY,
   SET_WEATHER,
-  SET_CITIES
+  SET_CITIES,
+  SET_USER_NAME
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
@@ -33,6 +34,7 @@ function locationInitialize () {
   const storedCity = Storage.getItem(STORAGE_KEYS.CITY);
   const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER);
   const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
+  const storedUser = Storage.getItem(STORAGE_KEYS.USER);
 
   if (storedCity) {
     store.commit(SET_CURRENT_CITY, storedCity);
@@ -42,6 +44,9 @@ function locationInitialize () {
   }
   if (storedWeather) {
     store.commit(SET_WEATHER, storedWeather);
+  }
+  if (storedUser) {
+    store.commit(SET_USER_NAME, storedUser);
   }
 };
 

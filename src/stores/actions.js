@@ -2,7 +2,7 @@ import {
   SET_GEO_LOCATION,
   FETCH_WEATHER_BY_GEO,
   FETCH_WEATHER_BY_CITY,
-  HAS_VALID_GEO_LOCATION,
+  IS_VALID_GEO_LOCATION,
   SET_WEATHER,
   SET_CURRENT_CITY
 } from 'stores/configs';
@@ -34,7 +34,7 @@ export const actions = {
     }
   },
   async [FETCH_WEATHER_BY_GEO] ({ commit, state, getters }) {
-    const isValidGeo = getters[HAS_VALID_GEO_LOCATION];
+    const isValidGeo = getters[IS_VALID_GEO_LOCATION];
     if (!isValidGeo) {
       throw new Error('NOT_VALID_GEO_LOCATION');
     }
