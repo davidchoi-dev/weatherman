@@ -4,11 +4,13 @@ import {
   SET_WEATHER,
   SET_CITIES,
   SET_USER_NAME,
-  SET_AIR_QUALITY
+  SET_AIR_QUALITY,
+  SET_PHOTOS,
+  SET_WEATHER_PHOTO
 } from 'stores/configs';
 import StorageHelper from '@/helpers/Storage';
 import WeatherHelper from '@/helpers/Weather';
-import { STORAGE_KEYS, WEATHER_SAVE_EXPIRY } from '@/constants';
+import { STORAGE_KEYS, WEATHER_SAVE_EXPIRY, WEATHERS } from '@/constants';
 
 export const mutations = {
   [SET_GEOLOCATION] (state, { latitude, longitude }) {
@@ -37,11 +39,27 @@ export const mutations = {
       StorageHelper.setItem(STORAGE_KEYS.AIR_QUALITY, airQuality, WEATHER_SAVE_EXPIRY);
     }
   },
+  [SET_WEATHER_PHOTO] (state, weatherName) {
+    const { photos } = state;
+    if (!Object.keys(photos).length) {
+      state.weatherPhoto = {};
+      return;
+    }
+    const category = weatherName ? photos[weatherName] : photos[WEATHERS.UNKNOWN];
+    const randomCount = Math.floor(Math.random() * category.length);
+    state.weatherPhoto = category[randomCount];
+  },
   [SET_CITIES] (state, cities) {
     if (state.cities.length) {
       return;
     }
     state.cities = cities;
+  },
+  [SET_PHOTOS] (state, photos) {
+    if (state.photos.length) {
+      return;
+    }
+    state.photos = photos;
   },
   [SET_USER_NAME] (state, userName = '') {
     if (userName) {

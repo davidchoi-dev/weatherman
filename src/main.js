@@ -10,16 +10,22 @@ import {
   SET_CURRENT_CITY,
   SET_WEATHER,
   SET_CITIES,
-  SET_USER_NAME, FETCH_WEATHER_BY_CITY, FETCH_WEATHER_BY_GEO, SET_AIR_QUALITY
+  SET_USER_NAME,
+  FETCH_WEATHER_BY_GEO,
+  SET_AIR_QUALITY,
+  SET_PHOTOS,
+  SET_CURRENT_CITY_WITH_WEATHER, SET_WEATHER_PHOTO
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
+
+// json
 import Cities from 'static/city.list.min';
+import Photos from 'static/photos';
 
 Vue.config.productionTip = false;
 
 async function locationInitialize () {
-  // Find Geo
   const storedCity = Storage.getItem(STORAGE_KEYS.CITY);
   const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER, true);
   const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
@@ -36,8 +42,7 @@ async function locationInitialize () {
     store.commit(SET_AIR_QUALITY, storedAirQuality);
   }
   else if (storedCity) {
-    store.commit(SET_CURRENT_CITY, storedCity);
-    await store.dispatch(FETCH_WEATHER_BY_CITY, storedCity.id);
+    await store.dispatch(SET_CURRENT_CITY_WITH_WEATHER, storedCity);
   }
   else if (storedGeo) {
     store.commit(SET_GEOLOCATION, storedGeo);
@@ -48,6 +53,8 @@ async function locationInitialize () {
 (async function () {
   await locationInitialize();
   store.commit(SET_CITIES, Cities);
+  store.commit(SET_PHOTOS, Photos);
+  store.commit(SET_WEATHER_PHOTO, store.state.weather.name);
   /* eslint-disable no-new */
   new Vue({
     el: '#app',
