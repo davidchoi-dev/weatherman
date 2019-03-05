@@ -2,13 +2,13 @@
   <div id="login">
     <div class=login-form>
       <div v-show="step === 0">
+        <h3>Hi, There. Who are you?</h3>
+        <input v-model="userName" type="text" @keyup.enter="onChangeUserName">
+      </div>
+      <div v-show="step === 1">
         <h3>Where are you?</h3>
         <CitySearchForm @submit="onChangeCity" />
         <button @click="onClickCurrentLocation">Current Location</button>
-      </div>
-      <div v-show="step === 1">
-        <h3>What's your name?</h3>
-        <input v-model="userName" type="text" @keyup.enter="onChangeUserName">
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@ export default {
     async onChangeCity (city) {
       try {
         await this.setCityWithWeather(city);
-        this.nextStep();
+        this.close();
       }
       catch (e) {
         alert('Cannot find your city. click current location button');
@@ -51,7 +51,7 @@ export default {
     async onClickCurrentLocation () {
       try {
         await this.setGeolocationWithWeather();
-        this.nextStep();
+        this.close();
       }
       catch (e) {
         alert('Cannot find your location');
@@ -60,7 +60,12 @@ export default {
     },
     onChangeUserName () {
       this.setUser(this.userName);
-      this.close();
+      if (this.storedCity) {
+        this.close();
+      }
+      else {
+        this.nextStep();
+      }
     },
     nextStep () {
       this.step = 1;
@@ -75,11 +80,6 @@ export default {
       setCityWithWeather: SET_CURRENT_CITY_WITH_WEATHER,
       setGeolocationWithWeather: SET_GEOLOCATION_WITH_WEATHER,
     }),
-  },
-  created () {
-    if (this.storedCity) {
-      this.nextStep();
-    }
   },
 };
 </script>
