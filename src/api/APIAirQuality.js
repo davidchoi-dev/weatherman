@@ -6,8 +6,11 @@ class APIAirQuality extends APICore {
     super(options, key);
   }
 
-  fetchAirQuality (cityName) {
-    const endpoint = `/feed/${cityName}/`;
+  fetchAirQuality ({ latitude, longitude }) {
+    if (typeof latitude !== 'number' || typeof longitude !== 'number') {
+      return;
+    }
+    const endpoint = `/feed/geo:${latitude};${longitude}/`;
     return this._get(endpoint, {
       token: this.token,
     });

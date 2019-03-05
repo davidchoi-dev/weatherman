@@ -8,6 +8,7 @@
       <p>lng: {{ geolocation.longitude }}</p>
       <p>city: {{ city }}</p>
       <p>weather: {{ weather }}</p>
+      <p v-if="airQuality">aqi: {{ airQuality.aqi }}</p>
     </div>
   </div>
 </template>
@@ -21,6 +22,7 @@ export default {
     ...mapState({
       city: 'currentCity',
       weather: 'weather',
+      airQuality: 'airQuality',
       geolocation: 'geolocation',
       userName: 'userName',
     }),

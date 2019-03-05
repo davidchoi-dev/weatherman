@@ -77,3 +77,4 @@ export const OPEN_WEATHERS = {
   804: WEATHERS.CLOUDS, // overcast clouds
   1000: WEATHERS.UNKNOWN,
 };
+export const WEATHER_SAVE_EXPIRY = 1 / 24; // 1hour

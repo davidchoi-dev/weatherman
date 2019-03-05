@@ -24,7 +24,7 @@ async function locationInitialize () {
   const storedWeather = Storage.getItem(STORAGE_KEYS.WEATHER, true);
   const storedGeo = Storage.getItem(STORAGE_KEYS.GEO);
   const storedUser = Storage.getItem(STORAGE_KEYS.USER);
-  const storedAirQuality = Storage.getItem(STORAGE_KEYS.AIR_QUALITY);
+  const storedAirQuality = Storage.getItem(STORAGE_KEYS.AIR_QUALITY, true);
 
   if (storedUser) {
     store.commit(SET_USER_NAME, storedUser);

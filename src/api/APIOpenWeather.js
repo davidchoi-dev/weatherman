@@ -6,10 +6,10 @@ class APIOpenWeather extends APICore {
     super(options, key);
   }
 
-  fetchWeatherByGeoLocation ({ lng, lat }) {
+  fetchWeatherByGeoLocation ({ latitude, longitude }) {
     return this._get('', {
-      lat,
-      lon: lng,
+      lat: latitude,
+      lon: longitude,
       appid: this.token,
     });
   }

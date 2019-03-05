@@ -55,13 +55,13 @@ export const actions = {
       throw new Error('NOT_VALID_GEO_LOCATION');
     }
     try {
-      const { latitude: lat, longitude: lng } = state.geolocation;
-      const { data } = await APIOpenWeather.fetchWeatherByGeoLocation({ lat, lng });
+      const { latitude, longitude } = state.geolocation;
+      const { data } = await APIOpenWeather.fetchWeatherByGeoLocation({ latitude, longitude });
       const city = state.cities.find(city => city.id === data.id);
       commit(SET_CURRENT_CITY, city);
       commit(SET_WEATHER, data.weather[0]);
 
-      dispatch(FETCH_AIR_QUALITY_BY_CITY, city.name);
+      dispatch(FETCH_AIR_QUALITY_BY_CITY, { latitude, longitude });
 
       return data;
     }
@@ -75,13 +75,11 @@ export const actions = {
     }
     try {
       const { data } = await APIOpenWeather.fetchWeatherByCity(city.id);
-      commit(SET_GEOLOCATION, {
-        latitude: data.coord.lat,
-        longitude: data.coord.lon,
-      });
+      const { lat: latitude, lon: longitude } = data.coord;
+      commit(SET_GEOLOCATION, { latitude, longitude });
       commit(SET_WEATHER, data.weather[0]);
 
-      dispatch(FETCH_AIR_QUALITY_BY_CITY, city);
+      dispatch(FETCH_AIR_QUALITY_BY_CITY, { latitude, longitude });
 
       return data;
     }
@@ -89,16 +87,19 @@ export const actions = {
       return Promise.reject(e);
     }
   },
-  async [FETCH_AIR_QUALITY_BY_CITY] ({ commit, state }, city) {
-    if (!city.name) {
+  async [FETCH_AIR_QUALITY_BY_CITY] ({ commit }, { latitude, longitude }) {
+    if (typeof latitude !== 'number' || typeof longitude !== 'number') {
       return;
     }
     try {
-      const { data } = await APIAirQuality.fetchAirQuality(city.name);
+      const { data } = await APIAirQuality.fetchAirQuality({ latitude, longitude });
       if (data.status !== 'ok') {
         return;
       }
-      commit(SET_AIR_QUALITY, data.data);
+      commit(SET_AIR_QUALITY, {
+        aqi: data.data.aqi,
+        iaqi: data.data.iaqi,
+      });
       return data;
     }
     catch (e) {
