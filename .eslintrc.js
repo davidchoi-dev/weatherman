@@ -34,5 +34,6 @@ module.exports = {
       "functions": "never"
     }],
     'brace-style': ['error', 'stroustrup'],
+    'no-trailing-spaces': ['error', { skipBlankLines: true }],
   }
-}
+};
