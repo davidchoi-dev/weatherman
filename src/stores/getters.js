@@ -1,7 +1,9 @@
 import {
+  GET_TEMPERATURE,
   IS_VALID_GEO_LOCATION,
   NEED_LOGIN
 } from 'stores/configs';
+import { TEMPERATURE_UNITS } from '@/constants';
 
 export const getters = {
   [IS_VALID_GEO_LOCATION] (state) {
@@ -13,5 +15,25 @@ export const getters = {
     const invalidCity = !state.currentCity && !getters[IS_VALID_GEO_LOCATION];
     const invalidUser = !state.userName;
     return invalidCity || invalidUser;
+  },
+  [GET_TEMPERATURE] (state) {
+    const {
+      temperatureUnit: unit,
+      weather,
+    } = state;
+    if (!weather || !weather.temp) {
+      return;
+    }
+
+    const temp = weather.temp;
+    let calcedTemp = temp; // Default unit is KELVIN
+    if (unit === TEMPERATURE_UNITS.CELSIUS) {
+      calcedTemp = temp - 273.15;
+    }
+    else if (unit === TEMPERATURE_UNITS.FAHRENHEIT) {
+      calcedTemp = (temp - 273.15) * (9 / 5) + 32;
+    }
+
+    return parseFloat(calcedTemp.toFixed(2));
   },
 };

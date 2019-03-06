@@ -30,3 +30,8 @@ export const AIR_QUALITIES = {
   UNKNOWN: 'UNKNOWN',
 };
 export const WEATHER_SAVE_EXPIRY = 1 / 24; // 1hour
+export const TEMPERATURE_UNITS = {
+  KELVIN: 'K',
+  CELSIUS: 'C',
+  FAHRENHEIT: 'F',
+};

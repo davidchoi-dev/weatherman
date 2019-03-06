@@ -8,15 +8,17 @@
       <p>lng: {{ geolocation.longitude }}</p>
       <p>city: {{ city }}</p>
       <p>weather: {{ weather }}</p>
+      <p>temp: {{ temperature }}</p>
       <p v-if="airQuality">aqi: {{ airQuality.name }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import WeatherPhoto from '@/components/WeatherPhoto';
 import Login from '@/components/Login';
+import { GET_TEMPERATURE } from '@/stores/configs';
 
 export default {
   name: 'Dashboard',
@@ -28,6 +30,9 @@ export default {
       airQuality: 'airQuality',
       geolocation: 'geolocation',
       userName: 'userName',
+    }),
+    ...mapGetters({
+      temperature: GET_TEMPERATURE,
     }),
   },
 };

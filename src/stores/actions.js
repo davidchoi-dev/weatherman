@@ -74,8 +74,11 @@ export const actions = {
       const { latitude, longitude } = state.geolocation;
       const { data } = await APIOpenWeather.fetchWeatherByGeoLocation({ latitude, longitude });
       const city = state.cities.find(city => city.id === data.id);
+      const weather = data.weather[0];
+      weather.temp = data.main.temp;
+
       commit(SET_CURRENT_CITY, city);
-      dispatch(SET_WEATHER, data.weather[0]);
+      dispatch(SET_WEATHER, weather);
       dispatch(FETCH_AIR_QUALITY_BY_CITY, { latitude, longitude });
 
       return data;
@@ -91,8 +94,11 @@ export const actions = {
     try {
       const { data } = await APIOpenWeather.fetchWeatherByCity(city.id);
       const { lat: latitude, lon: longitude } = data.coord;
+      const weather = data.weather[0];
+      weather.temp = data.main.temp;
+
       commit(SET_GEOLOCATION, { latitude, longitude });
-      dispatch(SET_WEATHER, data.weather[0]);
+      dispatch(SET_WEATHER, weather);
       dispatch(FETCH_AIR_QUALITY_BY_CITY, { latitude, longitude });
 
       return data;
