@@ -3,26 +3,31 @@
     <div class="main-info">
       <Clock />
       <p
-        data-name="userName"
+        data-name="greeting"
         v-show="userName">
         {{ computedGreeting }}, {{ userName }}
       </p>
     </div>
     <WeatherViewer />
+    <AirQualityViewer />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import WeatherPhoto from '@/components/WeatherPhoto';
 import { GET_DAY_NIGHT } from '@/stores/configs';
 import Clock from '@/components/Clock';
 import WeatherViewer from '@/components/WeatherViewer';
 import { DAY_NIGHT } from '@/constants';
+import AirQualityViewer from '@/components/AirQualityViewer';
 
 export default {
   name: 'Dashboard',
-  components: { WeatherPhoto, Clock, WeatherViewer },
+  components: {
+    Clock,
+    WeatherViewer,
+    AirQualityViewer,
+  },
   computed: {
     computedGreeting () {
       if (this.dayNight === DAY_NIGHT.DAY) {
@@ -46,23 +51,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$padding: 1.5rem;
+
 #dashboard {
   height: 100vh;
-  text-align: center;
-  margin: 2rem;
-  color: #fff;
 }
 .main-info {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  p[data-name="userName"] {
-    text-align: center;
+  text-align: center;
+  .clock {
+    color: #fff;
+  }
+  p[data-name="greeting"] {
+    color: #fff;
     font-size: 2.5rem;
   }
 }
 .weather-viewer {
-  float: right;
+  position: absolute;
+  top: $padding;
+  right: $padding;
+  color: #fff;
+}
+.air-quality-viewer {
+  position: absolute;
+  bottom: $padding;
+  right: $padding;
+  color: #fff;
 }
 </style>

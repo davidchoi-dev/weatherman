@@ -1,13 +1,13 @@
 <template>
   <div class="weather-viewer">
-    <div data-name="weather">
+    <div v-if="weather" data-name="weather">
       <div data-name="weatherIcon" :style="{ 'background-image': `url(${weatherIcon})` }"></div>
       <div data-name="temperature">
         <span data-name="value">{{ temperature }}</span>
         <span data-name="unit" v-html="temperatureSign"></span>
       </div>
     </div>
-    <div data-name="location">{{ city.name }}, {{ city.country }}</div>
+    <div v-if="city" data-name="location">{{ city.name }}, {{ city.country }}</div>
   </div>
 </template>
 
