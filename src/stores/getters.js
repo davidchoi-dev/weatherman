@@ -3,12 +3,14 @@ import {
   IS_VALID_GEO_LOCATION,
   NEED_LOGIN,
   GET_TIME,
-  GET_DAY_NIGHT
+  GET_DAY_NIGHT,
+  GET_WEATHER_ICON
 } from 'stores/configs';
 import {
   DAY_NIGHT,
   TEMPERATURE_UNITS,
-  WEEK
+  WEEK,
+  WEATHER_ICONS
 } from '@/constants';
 
 const week = [WEEK.SUNDAY, WEEK.MONDAY, WEEK.TUESDAY, WEEK.WEDNESDAY, WEEK.THURSDAY, WEEK.FRIDAY, WEEK.SATURDAY];
@@ -57,12 +59,16 @@ export const getters = {
     };
   },
   [GET_DAY_NIGHT] (state) {
-    if (!state.weather || !state.weather.sunMovement) {
+    const { weather, now } = state;
+    if (!weather || !weather.sunMovement) {
       return DAY_NIGHT.UNKNOWN;
     }
 
-    const { now, weather } = state;
     const { sunset } = weather.sunMovement;
+    if (!sunset) {
+      return DAY_NIGHT.UNKNOWN;
+    }
+
     const nowTime = now.getTime();
     const sunsetTime = sunset.getTime();
     if (nowTime > sunsetTime) {
@@ -71,5 +77,13 @@ export const getters = {
     else {
       return DAY_NIGHT.DAY;
     }
+  },
+  [GET_WEATHER_ICON] (state, getters) {
+    const { weather } = state;
+    console.log(WEATHER_ICONS);
+    if (!weather) {
+      return '';
+    }
+    return WEATHER_ICONS[state.weather.name][getters[GET_DAY_NIGHT]];
   },
 };

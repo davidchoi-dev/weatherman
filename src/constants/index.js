@@ -50,3 +50,16 @@ export const DAY_NIGHT = {
   UNKNOWN: 'UNKNOWN',
 };
 export const TIME_UPDATE_INTERVAL = 15000; // 30s
+export const WEATHER_ICONS = (function () {
+  const result = {};
+  const basePath = 'static/icons/weather-icons';
+  Object.keys(WEATHERS).forEach(weatherKey => {
+    const weather = WEATHERS[weatherKey];
+    result[weather] = {};
+    Object.keys(DAY_NIGHT).forEach(dayNightKey => {
+      const dayNight = DAY_NIGHT[dayNightKey];
+      result[weather][dayNight] = `${basePath}/${weather.toLowerCase()}/${dayNight.toLowerCase()}.svg`;
+    });
+  });
+  return result;
+})();

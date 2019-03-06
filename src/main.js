@@ -37,6 +37,11 @@ async function locationInitialize () {
     store.commit(SET_USER_NAME, storedUser);
   }
   if (storedCity && storedWeather) {
+    if (storedWeather.sunMovement) {
+      const { sunrise, sunset } = storedWeather.sunMovement;
+      storedWeather.sunMovement.sunrise = new Date(sunrise);
+      storedWeather.sunMovement.sunset = new Date(sunset);
+    }
     store.commit(SET_CURRENT_CITY, storedCity);
     store.dispatch(SET_WEATHER, storedWeather);
     store.commit(SET_GEOLOCATION, storedGeo);

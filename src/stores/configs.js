@@ -17,6 +17,7 @@ export const START_CLOCK = 'START_CLOCK';
 export const UPDATE_TIME = 'SET_NOW';
 export const GET_TIME = 'GET_TIME';
 export const GET_DAY_NIGHT = 'GET_DAY_NIGHT';
+export const GET_WEATHER_ICON = 'GET_WEATHER_ICON';
 
 export const GET_TEMPERATURE = 'GET_TEMPERATURE';
 

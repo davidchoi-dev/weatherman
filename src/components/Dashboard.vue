@@ -13,6 +13,7 @@
     <!--</div>-->
     <div class="main-info">
       <Clock />
+      <div class="test" :style="{ 'background-image': `url(${weatherIcon})` }"></div>
       <p
         data-name="userName"
         v-show="userName">
@@ -28,7 +29,8 @@ import WeatherPhoto from '@/components/WeatherPhoto';
 import Login from '@/components/Login';
 import {
   GET_DAY_NIGHT,
-  GET_TEMPERATURE
+  GET_TEMPERATURE,
+  GET_WEATHER_ICON
 } from '@/stores/configs';
 import Clock from '@/components/Clock';
 import { DAY_NIGHT } from '@/constants';
@@ -58,6 +60,7 @@ export default {
     ...mapGetters({
       temperature: GET_TEMPERATURE,
       dayNight: GET_DAY_NIGHT,
+      weatherIcon: GET_WEATHER_ICON,
     }),
   },
 };
@@ -79,5 +82,9 @@ export default {
 p[data-name="userName"] {
   text-align: center;
   font-size: 2.5rem;
+}
+div.test {
+  width: 50px;
+  height: 50px;
 }
 </style>
