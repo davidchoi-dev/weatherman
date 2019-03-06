@@ -16,7 +16,7 @@
       <p
         data-name="userName"
         v-show="userName">
-        Hi, {{ userName }}
+        {{ computedGreeting }}, {{ userName }}
       </p>
     </div>
   </div>
@@ -26,13 +26,28 @@
 import { mapState, mapGetters } from 'vuex';
 import WeatherPhoto from '@/components/WeatherPhoto';
 import Login from '@/components/Login';
-import { GET_TEMPERATURE } from '@/stores/configs';
+import {
+  GET_DAY_NIGHT,
+  GET_TEMPERATURE
+} from '@/stores/configs';
 import Clock from '@/components/Clock';
+import { DAY_NIGHT } from '@/constants';
 
 export default {
   name: 'Dashboard',
   components: { Login, WeatherPhoto, Clock },
   computed: {
+    computedGreeting () {
+      if (this.dayNight === DAY_NIGHT.DAY) {
+        return 'Good day';
+      }
+      else if (this.dayNight === DAY_NIGHT.NIGHT) {
+        return 'Good Evening';
+      }
+      else {
+        return 'Hi';
+      }
+    },
     ...mapState({
       city: 'currentCity',
       weather: 'weather',
@@ -42,6 +57,7 @@ export default {
     }),
     ...mapGetters({
       temperature: GET_TEMPERATURE,
+      dayNight: GET_DAY_NIGHT,
     }),
   },
 };
