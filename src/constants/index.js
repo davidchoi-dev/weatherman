@@ -44,4 +44,9 @@ export const WEEK = {
   FRIDAY: 'FRI',
   SATURDAY: 'SAT',
 };
+export const DAY_NIGHT = {
+  DAY: 'DAY',
+  NIGHT: 'NIGHT',
+  UNKNOWN: 'UNKNOWN',
+};
 export const TIME_UPDATE_INTERVAL = 15000; // 30s

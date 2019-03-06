@@ -84,6 +84,12 @@ export const actions = {
       const city = state.cities.find(city => city.id === data.id);
       const weather = data.weather[0];
       weather.temp = data.main.temp;
+      if (data.sys.sunrise && data.sys.sunset) {
+        weather.sunMovement = {
+          sunrise: new Date(data.sys.sunrise * 1000),
+          sunset: new Date(data.sys.sunset * 1000),
+        };
+      }
 
       commit(SET_CURRENT_CITY, city);
       dispatch(SET_WEATHER, weather);
@@ -104,6 +110,12 @@ export const actions = {
       const { lat: latitude, lon: longitude } = data.coord;
       const weather = data.weather[0];
       weather.temp = data.main.temp;
+      if (data.sys.sunrise && data.sys.sunset) {
+        weather.sunMovement = {
+          sunrise: new Date(data.sys.sunrise * 1000),
+          sunset: new Date(data.sys.sunset * 1000),
+        };
+      }
 
       commit(SET_GEOLOCATION, { latitude, longitude });
       dispatch(SET_WEATHER, weather);

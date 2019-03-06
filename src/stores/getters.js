@@ -2,9 +2,14 @@ import {
   GET_TEMPERATURE,
   IS_VALID_GEO_LOCATION,
   NEED_LOGIN,
-  GET_TIME
+  GET_TIME,
+  GET_DAY_NIGHT
 } from 'stores/configs';
-import { TEMPERATURE_UNITS, WEEK } from '@/constants';
+import {
+  DAY_NIGHT,
+  TEMPERATURE_UNITS,
+  WEEK
+} from '@/constants';
 
 const week = [WEEK.SUNDAY, WEEK.MONDAY, WEEK.TUESDAY, WEEK.WEDNESDAY, WEEK.THURSDAY, WEEK.FRIDAY, WEEK.SATURDAY];
 
@@ -50,5 +55,21 @@ export const getters = {
     return {
       year, month, date, day, hour, minutes,
     };
+  },
+  [GET_DAY_NIGHT] (state) {
+    if (!state.weather || !state.weather.sunMovement) {
+      return DAY_NIGHT.UNKNOWN;
+    }
+
+    const { now, weather } = state;
+    const { sunset } = weather.sunMovement;
+    const nowTime = now.getTime();
+    const sunsetTime = sunset.getTime();
+    if (nowTime > sunsetTime) {
+      return DAY_NIGHT.NIGHT;
+    }
+    else {
+      return DAY_NIGHT.DAY;
+    }
   },
 };

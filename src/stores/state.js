@@ -11,4 +11,5 @@ export const state = {
   weatherPhoto: null,
   photos: {},
   now: new Date(),
+  sunMovement: null,
 };
