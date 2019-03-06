@@ -35,3 +35,13 @@ export const TEMPERATURE_UNITS = {
   CELSIUS: 'C',
   FAHRENHEIT: 'F',
 };
+export const WEEK = {
+  SUNDAY: 'SUN',
+  MONDAY: 'MON',
+  TUESDAY: 'TUE',
+  WEDNESDAY: 'WED',
+  THURSDAY: 'THU',
+  FRIDAY: 'FRI',
+  SATURDAY: 'SAT',
+};
+export const TIME_UPDATE_INTERVAL = 15000; // 30s

@@ -9,11 +9,14 @@ import {
   SET_CURRENT_CITY,
   SET_CURRENT_CITY_WITH_WEATHER,
   SET_AIR_QUALITY,
-  SET_WEATHER_PHOTO
+  SET_WEATHER_PHOTO,
+  UPDATE_TIME,
+  START_CLOCK
 } from 'stores/configs';
 import APIOpenWeather from '@/api/APIOpenWeather';
 import APIAirQuality from '@/api/APIAirQuality';
 import WeatherHelper from '@/helpers/Weather';
+import { TIME_UPDATE_INTERVAL } from '@/constants';
 
 const geoLocationPromise = function (options = {}) {
   return new Promise(function (resolve, reject) {
@@ -22,6 +25,11 @@ const geoLocationPromise = function (options = {}) {
 };
 
 export const actions = {
+  [START_CLOCK] ({ commit }) {
+    setInterval(() => {
+      commit(UPDATE_TIME);
+    }, TIME_UPDATE_INTERVAL);
+  },
   [SET_WEATHER] ({ commit, state }, weather) {
     if (!weather) {
       throw new Error('there is no weather data!');

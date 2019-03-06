@@ -10,4 +10,5 @@ export const state = {
   userName: '',
   weatherPhoto: null,
   photos: {},
+  now: new Date(),
 };

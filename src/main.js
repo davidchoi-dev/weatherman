@@ -14,7 +14,7 @@ import {
   FETCH_WEATHER_BY_GEO,
   SET_AIR_QUALITY,
   SET_PHOTOS,
-  SET_CURRENT_CITY_WITH_WEATHER
+  SET_CURRENT_CITY_WITH_WEATHER, START_CLOCK
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
@@ -51,6 +51,7 @@ async function locationInitialize () {
 }
 
 (async function () {
+  store.dispatch(START_CLOCK);
   store.commit(SET_CITIES, Cities);
   store.commit(SET_PHOTOS, Photos);
   await locationInitialize();

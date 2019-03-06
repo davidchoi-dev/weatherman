@@ -6,12 +6,16 @@ import {
   SET_USER_NAME,
   SET_AIR_QUALITY,
   SET_PHOTOS,
-  SET_WEATHER_PHOTO
+  SET_WEATHER_PHOTO,
+  UPDATE_TIME
 } from 'stores/configs';
 import StorageHelper from '@/helpers/Storage';
 import { STORAGE_KEYS, WEATHER_SAVE_EXPIRY } from '@/constants';
 
 export const mutations = {
+  [UPDATE_TIME] (state) {
+    state.now = new Date();
+  },
   [SET_GEOLOCATION] (state, { latitude, longitude }) {
     state.geolocation = { latitude, longitude };
     StorageHelper.setItem(STORAGE_KEYS.GEO, state.geolocation);
