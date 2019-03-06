@@ -18,6 +18,7 @@ import {
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
+import '@/filters';
 
 // json
 import Cities from 'static/city.list.min';

@@ -4,7 +4,7 @@
       <!--{{ now.year }}.{{ now.month }}.{{ now.date }} {{ now.day }}-->
     <!--</div>-->
     <div data-name="time">
-      {{ now.hour }}:{{ now.minutes }}
+      {{ now.hour | addZero }}:{{ now.minutes | addZero }}
     </div>
   </div>
 </template>
