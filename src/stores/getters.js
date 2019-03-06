@@ -44,7 +44,7 @@ export const getters = {
       calcedTemp = (temp - 273.15) * (9 / 5) + 32;
     }
 
-    return parseFloat(calcedTemp.toFixed(2));
+    return Math.round(calcedTemp);
   },
   [GET_TIME] (state) {
     const { now } = state;
@@ -80,7 +80,6 @@ export const getters = {
   },
   [GET_WEATHER_ICON] (state, getters) {
     const { weather } = state;
-    console.log(WEATHER_ICONS);
     if (!weather) {
       return '';
     }
