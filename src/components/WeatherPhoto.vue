@@ -1,11 +1,20 @@
 <template>
   <div id="weather-photo">
     <div class="dimmed"></div>
-    <div
-      v-if="photo"
-      class="photo"
-      :style="{ 'background-image': `url(${photo.image})` }">
-    </div>
+    <transition name="fade" mode="out-in" appear>
+      <div
+        v-if="photo"
+        class="photo"
+        :style="{ 'background-image': `url(${photo.image}?q=10)` }">
+        <div data-name="default"></div>
+      </div>
+      <div
+        v-else
+        class="photo"
+        data-name="default">
+        Default Photo: César Couto, unsplash
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -42,6 +51,10 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 1;
+  &[data-name="default"] {
+    background-image: url(/static/default-background.jpg);
+    color: transparent;
+  }
 }
 .dimmed {
   position: absolute;
