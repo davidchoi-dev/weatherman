@@ -95,8 +95,6 @@ export const getters = {
 
     const currentWeatherName = weather ? weather.name : WEATHERS.UNKNOWN;
     const currentDayNight = getters[GET_DAY_NIGHT];
-    console.log(currentWeatherName);
-
     const avilabledPhotos = photos.filter(photo => {
       const hasWeather = photo.weathers.some(weather => weather === currentWeatherName);
       if (!hasWeather) {

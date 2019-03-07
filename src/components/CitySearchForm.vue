@@ -1,7 +1,7 @@
 <template>
   <div class="city-search-form">
     <div class="city-input-wrapper">
-      <input v-model="cityName" type="text" @keyup="onKeyup">
+      <input v-model="cityName" ref="searchInput" type="text" @keyup="onKeyup">
       <ul v-show="isShowCityList">
         <li
           v-for="city in filteredCityList"
@@ -20,6 +20,12 @@ import _ from 'lodash';
 
 export default {
   name: 'CitySearchForm',
+  props: {
+    autofocus: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data () {
     return {
       selectedCity: null,
@@ -64,6 +70,11 @@ export default {
       this.filteredCityList = [];
       this.setShowCityList(false);
     },
+  },
+  mounted () {
+    if (this.autofocus) {
+      this.$refs.searchInput.focus();
+    }
   },
 };
 </script>

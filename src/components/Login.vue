@@ -8,7 +8,7 @@
         </div>
         <div class="form-step" v-show="step === 1" key="location">
           <h3>Where are you? {{ userName }}</h3>
-          <CitySearchForm @submit="onChangeCity" />
+          <CitySearchForm @submit="onChangeCity" :autofocus="true" />
           <button @click="onClickCurrentLocation">Use current location</button>
         </div>
       </transition-group>
