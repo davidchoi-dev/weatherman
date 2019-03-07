@@ -8,8 +8,7 @@ export const state = {
   airQuality: null,
   temperatureUnit: TEMPERATURE_UNITS.CELSIUS,
   userName: '',
-  weatherPhoto: null,
-  photos: {},
+  photos: [],
   now: new Date(),
   sunMovement: null,
 };

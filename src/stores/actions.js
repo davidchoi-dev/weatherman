@@ -9,7 +9,6 @@ import {
   SET_CURRENT_CITY,
   SET_CURRENT_CITY_WITH_WEATHER,
   SET_AIR_QUALITY,
-  SET_WEATHER_PHOTO,
   UPDATE_TIME,
   START_CLOCK
 } from 'stores/configs';
@@ -36,7 +35,6 @@ export const actions = {
     }
     weather.name = WeatherHelper.getWeatherName(weather.id);
     commit(SET_WEATHER, weather);
-    commit(SET_WEATHER_PHOTO, weather.name);
   },
   [SET_AIR_QUALITY] ({ commit }, airQuality) {
     if (airQuality) {

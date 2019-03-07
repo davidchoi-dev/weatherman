@@ -6,7 +6,6 @@ import {
   SET_USER_NAME,
   SET_AIR_QUALITY,
   SET_PHOTOS,
-  SET_WEATHER_PHOTO,
   UPDATE_TIME
 } from 'stores/configs';
 import StorageHelper from '@/helpers/Storage';
@@ -34,16 +33,6 @@ export const mutations = {
     state.airQuality = airQuality;
     StorageHelper.setItem(STORAGE_KEYS.AIR_QUALITY, airQuality, WEATHER_SAVE_EXPIRY);
   },
-  [SET_WEATHER_PHOTO] (state, weatherName) {
-    const { photos } = state;
-    if (!Object.keys(photos).length) {
-      state.weatherPhoto = {};
-      return;
-    }
-    const category = weatherName ? photos[weatherName] : photos.DEFAULT;
-    const randomCount = Math.floor(Math.random() * category.length);
-    state.weatherPhoto = category[randomCount];
-  },
   [SET_CITIES] (state, cities) {
     if (state.cities.length) {
       return;
@@ -55,7 +44,6 @@ export const mutations = {
       return;
     }
     state.photos = photos;
-    state.weatherPhoto = photos.DEFAULT[0];
   },
   [SET_USER_NAME] (state, userName = '') {
     if (userName) {

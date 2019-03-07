@@ -1,18 +1,23 @@
 <template>
   <div id="weather-photo">
     <div class="dimmed"></div>
-    <div class="photo" :style="{ 'background-image': `url(${photo.image})` }"></div>
+    <div
+      v-if="photo"
+      class="photo"
+      :style="{ 'background-image': `url(${photo.image})` }">
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
+import { GET_WEATHER_PHOTO } from '@/stores/configs';
 
 export default {
   name: 'WeatherPhoto',
   computed: {
-    ...mapState({
-      photo: 'weatherPhoto',
+    ...mapGetters({
+      photo: GET_WEATHER_PHOTO,
     }),
   },
 };

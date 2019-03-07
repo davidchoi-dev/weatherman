@@ -4,13 +4,15 @@ import {
   NEED_LOGIN,
   GET_TIME,
   GET_DAY_NIGHT,
-  GET_WEATHER_ICON
+  GET_WEATHER_ICON,
+  GET_WEATHER_PHOTO
 } from 'stores/configs';
 import {
   DAY_NIGHT,
   TEMPERATURE_UNITS,
   WEEK,
-  WEATHER_ICONS
+  WEATHER_ICONS,
+  WEATHERS
 } from '@/constants';
 
 const week = [WEEK.SUNDAY, WEEK.MONDAY, WEEK.TUESDAY, WEEK.WEDNESDAY, WEEK.THURSDAY, WEEK.FRIDAY, WEEK.SATURDAY];
@@ -84,5 +86,27 @@ export const getters = {
       return '';
     }
     return WEATHER_ICONS[state.weather.name][getters[GET_DAY_NIGHT]];
+  },
+  [GET_WEATHER_PHOTO] (state, getters) {
+    const { photos, weather } = state;
+    if (!photos.length) {
+      return null;
+    }
+
+    const currentWeatherName = weather ? weather.name : WEATHERS.UNKNOWN;
+    const currentDayNight = getters[GET_DAY_NIGHT];
+    console.log(currentWeatherName);
+
+    const avilabledPhotos = photos.filter(photo => {
+      const hasWeather = photo.weathers.some(weather => weather === currentWeatherName);
+      if (!hasWeather) {
+        return false;
+      }
+
+      return photo.dayNight.some(dn => dn === currentDayNight);
+    });
+
+    const randomCount = Math.floor(Math.random() * avilabledPhotos.length);
+    return avilabledPhotos[randomCount];
   },
 };

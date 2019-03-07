@@ -1,61 +1,64 @@
-{
-  "THUNDER_STORM": [{
-    "image": "https://images.unsplash.com/photo-1465799522714-8eb0e6fccf73",
-    "link": "https://unsplash.com/photos/2uOcrLACf_4",
-    "source": "unsplash",
-    "author": "Layne Lawson"
-  }, {
-    "image": "https://images.unsplash.com/photo-1500674425229-f692875b0ab7",
-    "link": "https://unsplash.com/photos/E-Zuyev2XWo",
-    "source": "unsplash",
-    "author": "Johannes Plenio"
-  }],
-  "DRIZZLE": [{
-    "image": "https://images.unsplash.com/photo-1541919329513-35f7af297129",
-    "link": "https://unsplash.com/photos/UsYOap7yIMg",
-    "source": "unsplash",
-    "author": "MILKOVÍ"
-  }],
-  "RAIN": [{
-    "image": "https://images.unsplash.com/photo-1496034663057-6245f11be793",
-    "link": "https://unsplash.com/photos/8yt8kBuEqok",
-    "source": "unsplash",
-    "author": "Liv Bruce"
-  }],
-  "SNOW": [{
-    "image": "https://images.unsplash.com/photo-1483056293146-9eac9521932f",
-    "link": "https://unsplash.com/photos/aoxZlTnRZ2k",
-    "source": "unsplash",
-    "author": "Jonny McNee"
-  }],
-  "FOG": [{
-    "image": "https://images.unsplash.com/photo-1479476437642-f85d89e5ad7b",
-    "link": "https://unsplash.com/photos/_v6mhdOK2g0",
-    "source": "unsplash",
-    "author": "Markus Spiske"
-  }],
-  "CLEAR": [{
-    "image": "https://images.unsplash.com/photo-1461659844783-85649bf4b913",
-    "link": "https://unsplash.com/photos/UW2LN2jlS_o",
-    "source": "unsplash",
-    "author": "Matej Kokalj"
-  }],
-  "CLOUDS": [{
-    "image": "https://images.unsplash.com/photo-1495933925743-bb94d1d4ea4c",
-    "link": "https://unsplash.com/photos/L99UKlcUBJY",
-    "source": "unsplash",
-    "author": "Cody Schroeder"
-  }],
-  "UNKNOWN": [{
-    "image": "https://images.unsplash.com/photo-1500785489750-e970b7ad5e17",
-    "link": "https://unsplash.com/photos/VL5Gb0sC1LY",
-    "source": "unsplash",
-    "author": "Simon Noh"
-  }],
-  "DEFAULT": [{
-    "image": "https://images.unsplash.com/photo-1500785489750-e970b7ad5e17",
-    "link": "https://unsplash.com/photos/VL5Gb0sC1LY",
-    "source": "unsplash",
-    "author": "Simon Noh"
-  }]
-}
+[{
+  "image": "https://images.unsplash.com/photo-1465799522714-8eb0e6fccf73",
+  "link": "https://unsplash.com/photos/2uOcrLACf_4",
+  "source": "unsplash",
+  "author": "Layne Lawson",
+  "weathers": ["THUNDER_STORM"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1500674425229-f692875b0ab7",
+  "link": "https://unsplash.com/photos/E-Zuyev2XWo",
+  "source": "unsplash",
+  "author": "Johannes Plenio",
+  "weathers": ["THUNDER_STORM"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1541919329513-35f7af297129",
+  "link": "https://unsplash.com/photos/UsYOap7yIMg",
+  "source": "unsplash",
+  "author": "MILKOVÍ",
+  "weathers": ["DRIZZLE"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1496034663057-6245f11be793",
+  "link": "https://unsplash.com/photos/8yt8kBuEqok",
+  "source": "unsplash",
+  "author": "Liv Bruce",
+  "weathers": ["RAIN"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1483056293146-9eac9521932f",
+  "link": "https://unsplash.com/photos/aoxZlTnRZ2k",
+  "source": "unsplash",
+  "author": "Jonny McNee",
+  "weathers": ["SNOW"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1479476437642-f85d89e5ad7b",
+  "link": "https://unsplash.com/photos/_v6mhdOK2g0",
+  "source": "unsplash",
+  "author": "Markus Spiske",
+  "weathers": ["FOG"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1461659844783-85649bf4b913",
+  "link": "https://unsplash.com/photos/UW2LN2jlS_o",
+  "source": "unsplash",
+  "author": "Matej Kokalj",
+  "weathers": ["CLEAR"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1495933925743-bb94d1d4ea4c",
+  "link": "https://unsplash.com/photos/L99UKlcUBJY",
+  "source": "unsplash",
+  "author": "Cody Schroeder",
+  "weathers": ["CLOUDS"],
+  "dayNight": ["DAY", "NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1500785489750-e970b7ad5e17",
+  "link": "https://unsplash.com/photos/VL5Gb0sC1LY",
+  "source": "unsplash",
+  "author": "Simon Noh",
+  "weathers": ["UNKNOWN"],
+  "dayNight": ["DAY", "NIGHT", "UNKNOWN"]
+}]
