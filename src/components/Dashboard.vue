@@ -10,6 +10,7 @@
     </div>
     <WeatherViewer />
     <AirQualityViewer />
+    <WeatherPhotoInfo />
   </div>
 </template>
 
@@ -20,10 +21,12 @@ import Clock from '@/components/Clock';
 import WeatherViewer from '@/components/WeatherViewer';
 import { DAY_NIGHT } from '@/constants';
 import AirQualityViewer from '@/components/AirQualityViewer';
+import WeatherPhotoInfo from '@/components/WeatherPhotoInfo';
 
 export default {
   name: 'Dashboard',
   components: {
+    WeatherPhotoInfo,
     Clock,
     WeatherViewer,
     AirQualityViewer,
@@ -74,6 +77,12 @@ $padding: 1.5rem;
   position: absolute;
   top: $padding;
   right: $padding;
+  color: #fff;
+}
+.weather-photo-info {
+  position: absolute;
+  bottom: $padding;
+  left: $padding;
   color: #fff;
 }
 .air-quality-viewer {
