@@ -1,6 +1,11 @@
-# weatherman
+# Weatherman
+집에 남아도는 컴퓨터 가만히 두지 말고 대시보드로 활용하고 싶어서 만든 대시보드 웹어플리케이션입니다.
 
-> A Vue.js project
+- 날씨에 맞게 변하는 이쁜 사진(unsplash에 아직 API 퍼미션 못받음...)
+- 미리미리 챙기는 미세먼지 정보
+- 유튜브로 음악도 틀수 있으면 어떨까?
+
+> [Live Demo](https://weatherman-evan.herokuapp.com/)
 
 ## Build Setup
 
@@ -22,6 +27,7 @@ npm run unit
 
 # run all tests
 npm test
-```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# Start resource serving server
+npm start
+```
