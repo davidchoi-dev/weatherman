@@ -10,7 +10,9 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "npm rebuild node-sass && node build/build.js"
+    "build": "node build/build.js",
+    "postinstall": "npm rebuild",
+    "deploy": "git push heroku master"
   },
   "dependencies": {
     "axios": "^0.18.0",
