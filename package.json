@@ -11,8 +11,7 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
-    "postinstall": "npm rebuild",
-    "deploy": "git push heroku master"
+    "postinstall": "npm rebuild"
   },
   "dependencies": {
     "axios": "^0.19.0",
