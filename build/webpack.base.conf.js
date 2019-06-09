@@ -1,8 +1,9 @@
 'use strict'
-const path = require('path')
-const utils = require('./utils')
-const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
+const path = require('path');
+const utils = require('./utils');
+const config = require('../config');
+const vueLoaderConfig = require('./vue-loader.conf');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -69,10 +70,10 @@ module.exports = {
           name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
       },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
+      // {
+      //   test: /\.json$/,
+      //   loader: 'json',
+      // },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
@@ -94,5 +95,8 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
-}
+  },
+  plugins: [
+    new VueLoaderPlugin(),
+  ]
+};

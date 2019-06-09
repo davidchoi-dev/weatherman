@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import {GET_TIME} from '@/stores/configs';
+import { GET_TIME } from '@/stores/configs';
 // import { WEEK } from '@/constants';
 
 // const week = [WEEK.SUNDAY, WEEK.MONDAY, WEEK.TUESDAY, WEEK.WEDNESDAY, WEEK.THURSDAY, WEEK.FRIDAY, WEEK.SATURDAY];

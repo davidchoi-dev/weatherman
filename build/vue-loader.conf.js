@@ -18,5 +18,9 @@ module.exports = {
     source: 'src',
     img: 'src',
     image: 'xlink:href'
-  }
+  },
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+  },
+  esModule: true
 }

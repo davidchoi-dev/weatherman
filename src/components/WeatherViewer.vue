@@ -26,6 +26,8 @@ export default {
           return '&#8451;';
         case TEMPERATURE_UNITS.FAHRENHEIT:
           return '&#8457;';
+        default:
+          return '';
       }
     },
     ...mapState({
