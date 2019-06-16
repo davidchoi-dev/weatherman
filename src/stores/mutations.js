@@ -8,6 +8,7 @@ import {
   SET_USER_NAME,
   SET_AIR_QUALITY,
   SET_PHOTOS,
+  SET_WEATHER_PHOTO,
   UPDATE_TIME
 } from 'stores/configs';
 import StorageHelper from '@/helpers/Storage';
@@ -38,6 +39,9 @@ export const mutations = {
   [SET_WEATHER] (state, weather) {
     state.weather = weather;
     StorageHelper.setItem(STORAGE_KEYS.WEATHER, state.weather, WEATHER_SAVE_EXPIRY);
+  },
+  [SET_WEATHER_PHOTO] (state, photo) {
+    state.currentPhoto = photo;
   },
   [SET_AIR_QUALITY] (state, airQuality) {
     state.airQuality = airQuality;

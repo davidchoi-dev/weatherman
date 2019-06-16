@@ -13,12 +13,14 @@ import {
   START_CLOCK,
   RESET_CURRENT_CITY,
   DESTROY_CURRENT_CITY,
-  DESTROY_GEOLOCATION
+  DESTROY_GEOLOCATION,
+  SET_WEATHER_PHOTO
 } from 'stores/configs';
 import APIOpenWeather from '@/api/APIOpenWeather';
 import APIAirQuality from '@/api/APIAirQuality';
 import WeatherHelper from '@/helpers/Weather';
-import { TIME_UPDATE_INTERVAL } from '@/constants';
+import { TIME_UPDATE_INTERVAL, WEATHERS } from '@/constants';
+import { GET_DAY_NIGHT } from '@/stores/configs';
 
 const geoLocationPromise = function (options = {}) {
   return new Promise(function (resolve, reject) {
@@ -150,5 +152,25 @@ export const actions = {
   [RESET_CURRENT_CITY] ({ commit }) {
     commit(DESTROY_CURRENT_CITY);
     commit(DESTROY_GEOLOCATION);
+  },
+  [SET_WEATHER_PHOTO] ({ state, commit, getters }) {
+    const { photos, weather } = state;
+    if (!photos.length) {
+      commit(SET_WEATHER_PHOTO, null);
+      return;
+    }
+    const currentWeatherName = weather ? weather.name : WEATHERS.UNKNOWN;
+    const currentDayNight = getters[GET_DAY_NIGHT];
+    const avilabledPhotos = photos.filter(photo => {
+      const hasWeather = photo.weathers.some(weather => weather === currentWeatherName);
+      if (!hasWeather) {
+        return false;
+      }
+      return photo.dayNight.some(dn => dn === currentDayNight);
+    });
+
+    const randomCount = Math.floor(Math.random() * avilabledPhotos.length);
+    console.log(avilabledPhotos);
+    commit(SET_WEATHER_PHOTO, avilabledPhotos[randomCount]);
   },
 };

@@ -19,14 +19,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { GET_WEATHER_PHOTO } from '@/stores/configs';
+import { mapState } from 'vuex';
 
 export default {
   name: 'WeatherPhoto',
   computed: {
-    ...mapGetters({
-      photo: GET_WEATHER_PHOTO,
+    ...mapState({
+      photo: store => store.currentPhoto,
     }),
   },
 };

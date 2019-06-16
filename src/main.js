@@ -14,7 +14,7 @@ import {
   FETCH_WEATHER_BY_GEO,
   SET_AIR_QUALITY,
   SET_PHOTOS,
-  SET_CURRENT_CITY_WITH_WEATHER, START_CLOCK
+  SET_CURRENT_CITY_WITH_WEATHER, START_CLOCK, SET_WEATHER_PHOTO
 } from 'stores/configs';
 import { STORAGE_KEYS } from '@/constants';
 import Storage from '@/helpers/Storage';
@@ -61,6 +61,8 @@ async function locationInitialize () {
   store.commit(SET_CITIES, Cities);
   store.commit(SET_PHOTOS, Photos);
   await locationInitialize();
+
+  store.dispatch(SET_WEATHER_PHOTO);
   /* eslint-disable no-new */
   new Vue({
     el: '#app',
