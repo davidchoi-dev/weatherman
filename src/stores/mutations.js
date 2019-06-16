@@ -1,6 +1,8 @@
 import {
   SET_GEOLOCATION,
+  DESTROY_GEOLOCATION,
   SET_CURRENT_CITY,
+  DESTROY_CURRENT_CITY,
   SET_WEATHER,
   SET_CITIES,
   SET_USER_NAME,
@@ -19,11 +21,19 @@ export const mutations = {
     state.geolocation = { latitude, longitude };
     StorageHelper.setItem(STORAGE_KEYS.GEO, state.geolocation);
   },
+  [DESTROY_GEOLOCATION] (state) {
+    state.geolocation = { latitude: -1, longitude: -1 };
+    StorageHelper.removeItem(STORAGE_KEYS.GEO);
+  },
   [SET_CURRENT_CITY] (state, city) {
     if (city) {
       state.currentCity = city;
       StorageHelper.setItem(STORAGE_KEYS.CITY, state.currentCity);
     }
+  },
+  [DESTROY_CURRENT_CITY] (state) {
+    state.currentCity = null;
+    StorageHelper.removeItem(STORAGE_KEYS.CITY);
   },
   [SET_WEATHER] (state, weather) {
     state.weather = weather;

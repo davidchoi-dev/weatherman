@@ -1,8 +1,5 @@
 <template>
   <div class="clock">
-    <!--<div data-name="date">-->
-      <!--{{ now.year }}.{{ now.month }}.{{ now.date }} {{ now.day }}-->
-    <!--</div>-->
     <div data-name="time">
       {{ now.hour | addZero }}:{{ now.minutes | addZero }}
     </div>

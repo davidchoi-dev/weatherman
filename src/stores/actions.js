@@ -10,7 +10,10 @@ import {
   SET_CURRENT_CITY_WITH_WEATHER,
   SET_AIR_QUALITY,
   UPDATE_TIME,
-  START_CLOCK
+  START_CLOCK,
+  RESET_CURRENT_CITY,
+  DESTROY_CURRENT_CITY,
+  DESTROY_GEOLOCATION
 } from 'stores/configs';
 import APIOpenWeather from '@/api/APIOpenWeather';
 import APIAirQuality from '@/api/APIAirQuality';
@@ -143,5 +146,9 @@ export const actions = {
     catch (e) {
       return Promise.reject(e);
     }
+  },
+  [RESET_CURRENT_CITY] ({ commit }) {
+    commit(DESTROY_CURRENT_CITY);
+    commit(DESTROY_GEOLOCATION);
   },
 };

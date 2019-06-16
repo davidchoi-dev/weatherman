@@ -7,14 +7,15 @@
         <span data-name="unit" v-html="temperatureSign"></span>
       </div>
     </div>
-    <div v-if="city" data-name="location">{{ city.name }}, {{ city.country }}</div>
+    <div v-if="city" data-name="location" @click="resetCurrentCity">{{ city.name }}, {{ city.country }}</div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { GET_TEMPERATURE, GET_WEATHER_ICON } from '@/stores/configs';
+import { mapState, mapGetters, mapActions } from 'vuex';
+import { GET_TEMPERATURE, GET_WEATHER_ICON, RESET_CURRENT_CITY } from '@/stores/configs';
 import { TEMPERATURE_UNITS } from '@/constants';
+
 export default {
   name: 'WeatherViewer',
   computed: {
@@ -38,6 +39,11 @@ export default {
     ...mapGetters({
       temperature: GET_TEMPERATURE,
       weatherIcon: GET_WEATHER_ICON,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      resetCurrentCity: RESET_CURRENT_CITY,
     }),
   },
 };
@@ -70,6 +76,14 @@ div[data-name="temperature"] {
       font-size: 1rem;
       margin-left: -0.2rem;
     }
+  }
+}
+div[data-name="location"] {
+  text-align: right;
+  cursor: pointer;
+  transition: opacity .2s ease-in-out;
+  &:hover {
+    opacity: .7;
   }
 }
 </style>
