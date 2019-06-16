@@ -96,4 +96,13 @@
   "author": "Larm Rmah",
   "weathers": ["FOG"],
   "dayNight": ["NIGHT"]
+}, {
+  "image": "https://images.unsplash.com/photo-1455192285714-bfa3b47c4849?ixlib",
+  "link": "https://unsplash.com/photos/RNflFo6bUP4",
+  "source": "unsplash",
+  "author": "Ludde Lorentz",
+  "weathers": ["FOG"],
+  "dayNight": ["NIGHT"]
+}, {
+
 }]
