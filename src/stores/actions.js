@@ -34,12 +34,13 @@ export const actions = {
       commit(UPDATE_TIME);
     }, TIME_UPDATE_INTERVAL);
   },
-  [SET_WEATHER] ({ commit, state }, weather) {
+  [SET_WEATHER] ({ commit, dispatch }, weather) {
     if (!weather) {
       throw new Error('there is no weather data!');
     }
     weather.name = WeatherHelper.getWeatherName(weather.id);
     commit(SET_WEATHER, weather);
+    dispatch(SET_WEATHER_PHOTO);
   },
   [SET_AIR_QUALITY] ({ commit }, airQuality) {
     if (airQuality) {
@@ -47,7 +48,7 @@ export const actions = {
       commit(SET_AIR_QUALITY, airQuality);
     }
   },
-  async [SET_GEOLOCATION_WITH_WEATHER] ({ commit, state, dispatch }) {
+  async [SET_GEOLOCATION_WITH_WEATHER] ({ commit, dispatch }) {
     try {
       const { coords } = await geoLocationPromise();
       if (typeof coords.latitude !== 'number' || typeof coords.longitude !== 'number') {
@@ -178,7 +179,6 @@ export const actions = {
     });
 
     const randomCount = Math.floor(Math.random() * avilabledPhotos.length);
-    console.log(avilabledPhotos);
     commit(SET_WEATHER_PHOTO, avilabledPhotos[randomCount]);
   },
 };
