@@ -84,7 +84,6 @@ export const actions = {
     try {
       const { latitude, longitude } = state.geolocation;
       const { data } = await APIOpenWeather.fetchWeatherByGeoLocation({ latitude, longitude });
-      const city = state.cities.find(city => city.id === data.id);
       const weather = data.weather[0];
       weather.temp = data.main.temp;
       if (data.sys.sunrise && data.sys.sunset) {
@@ -94,9 +93,18 @@ export const actions = {
         };
       }
 
-      commit(SET_CURRENT_CITY, city);
       dispatch(SET_WEATHER, weather);
       dispatch(FETCH_AIR_QUALITY_BY_CITY, { latitude, longitude });
+
+      let city = state.cities.find(city => city.id === data.id);
+      if (!city) {
+        city = {
+          id: data.id,
+          name: data.name,
+          country: data.sys.country,
+        };
+      }
+      commit(SET_CURRENT_CITY, city);
 
       return data;
     }
@@ -104,7 +112,7 @@ export const actions = {
       return Promise.reject(e);
     }
   },
-  async [FETCH_WEATHER_BY_CITY] ({ commit, state, dispatch }, city) {
+  async [FETCH_WEATHER_BY_CITY] ({ commit, dispatch }, city) {
     if (!city.id || !city.name) {
       return;
     }
