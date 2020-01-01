@@ -1,3 +1,7 @@
+> Depreacted!
+> 이 프로젝트는 React+Typescript로 새로 작성된 Zarbis로 포팅되었습니다.
+> https://github.com/evan-moon/zarbis
+
 # Weatherman
 집에 남아도는 컴퓨터 가만히 두지 말고 대시보드로 활용하고 싶어서 만든 대시보드 웹어플리케이션입니다.
 
